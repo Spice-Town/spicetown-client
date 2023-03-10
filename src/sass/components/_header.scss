@@ -1,0 +1,38 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 150px;
+  border-bottom: 1px solid black;
+
+  &__link-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 150px;
+  }
+
+}
+
+
+// spicetown logo
+.mantine-3y8yz3 {
+  margin-left: 10px;
+  margin-bottom: 15px;
+}
+
+// nav links
+.mantine-1mji3m1 {
+border-radius: 6px;
+margin-right: 5px;
+}
+
+.mantine-1mji3m1:hover {
+background-color: bisque;
+  }
+
+// nav link text
+.mantine-v2d0vk {
+font-size: 30px;
+}
