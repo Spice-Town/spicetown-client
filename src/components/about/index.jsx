@@ -9,7 +9,7 @@ export default function About() {
           width={600}
           height={600}
           src={null}
-          alt="Owner Image"
+          alt="Owner_Image"
           withPlaceholder
         />
       </div>
