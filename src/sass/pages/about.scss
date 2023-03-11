@@ -6,12 +6,8 @@
   border: 1px solid black;
 
   &__image-column {
-    margin-left: 30px;
-    img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
+    display: flex;
+    justify-content: center;
   }
 
   &__text-column {
@@ -23,6 +19,7 @@
       margin-top: 0;
       margin-bottom: 10px;
       font-weight: 800;
+      font-size: 40px;
     }
   }
 
@@ -36,6 +33,7 @@
   &__text {
     margin-top: 0;
     padding: 5px;
+    font-size: 30px;
   }
 }
 
