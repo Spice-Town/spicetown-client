@@ -1,0 +1,8 @@
+/** @format */
+// Script required to compile to css. Change Directory as needed
+//"compile:sass": "sass sass/main.scss public/stylesheets/style.css -w"
+
+@import 'components/footer';
+@import 'components/header';
+
+@import 'pages/splash';
