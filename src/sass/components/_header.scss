@@ -13,6 +13,20 @@
     margin-right: 150px;
   }
 
+  &__burger {
+    display: none;
+  }
+
+  @media screen and (max-width: 953px) {
+      &__link-group {
+      display: none;
+    }
+
+    &__burger {
+      display: block;
+      margin-right: 30px;
+    }
+  }
 }
 
 
@@ -30,9 +44,21 @@ margin-right: 5px;
 
 .mantine-1mji3m1:hover {
 background-color: bisque;
-  }
+}
 
 // nav link text
 .mantine-v2d0vk {
 font-size: 30px;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+// sidebar drawer
+.mantine-ub9d20 {
+  background-color: #fdfce6;
+}
+
+// sidebar title
+.mantine-cx9mud {
+  font-size: 30px;
+  font-weight: 900;
 }
