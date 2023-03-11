@@ -33,7 +33,6 @@ export default function Contact() {
     }
   };
   
-
   const validateIssue = () => {
     if (issue.trim().length < 5) {
       setIssueError('Description must be at least 5 characters long');
@@ -44,11 +43,9 @@ export default function Contact() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     validateName();
     validatePhone();
     validateIssue();
-
     if (nameError !== '' || phoneError !== '' || issueError !== '') {
       return;
     }
@@ -73,7 +70,6 @@ export default function Contact() {
       }, 7000);
     }
   };
-
 
   return (
     <div className="contact">
