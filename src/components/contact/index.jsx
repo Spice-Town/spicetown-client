@@ -50,9 +50,14 @@ export default function Contact() {
       return;
     }
 
+
+   // `${import.meta.env.VITE_SERVER}/mail`   ---- Deployed
+
+    // http://localhost:3001/mail' ---- local
+
     const data = { name, phone, issue };
     try {
-      await axios.post('http://localhost:3001/mail', data);
+      await axios.post(`${import.meta.env.VITE_SERVER}/mail`, data);
       setName('');
       setPhone('');
       setIssue('');
