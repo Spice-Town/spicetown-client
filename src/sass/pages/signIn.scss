@@ -1,0 +1,20 @@
+$margin: 20px;
+
+.signIn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  &__title {
+    margin-top: $margin;
+  }
+  
+  &__button {
+    margin: $margin;
+  }
+
+  &__input {
+    margin-top: $margin;
+  }
+}
