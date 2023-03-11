@@ -1,33 +1,30 @@
 .repairs {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   height: 100%;
 
   &__button {
     margin-top: 30px;
     margin-bottom: 30px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   &__text-area {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    width: 99%;
-    margin-top: 30px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    height: 100%;
   }
-  
+
   &__text-box {
-    width: 48%;
-    height: 500px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    margin: 10px;
-    margin-bottom: 30px;
     display: flex;
     flex-direction: column;
+    margin: 20px;
+    height: 400px;
   }
+
 
   &__header-box {
     display: flex;
@@ -79,3 +76,16 @@
     margin-left: 10px;
   }
 }
+
+@media screen and (max-width: 1200px) {
+  .repairs__text-area {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 952px) {
+  .repairs__text-area {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
