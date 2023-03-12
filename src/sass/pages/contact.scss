@@ -17,6 +17,12 @@
   transition: opacity 0.5s ease-in-out;
   }
 
+  @media screen and (max-width: 952px) {
+    &__alert {
+      width: 50%;
+    }
+  }
+
   &__alert.visible {
   opacity: 1; 
     transition: opacity 0.5s ease-in-out;
