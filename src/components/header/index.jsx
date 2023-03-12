@@ -34,6 +34,7 @@ export default function Header() {
   return (
     <div className='header'>
       <>
+      <div className='header__logo'>
       <Image
         src='../../../spicetown.png'
         fit='contain'
@@ -41,6 +42,7 @@ export default function Header() {
         width={width}
         onClick={() => handleNavClick('home')}
       />
+      </div>
       <div className='header__link-group'>
         <NavLink
           active={'repairs' === active}
