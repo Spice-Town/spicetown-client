@@ -14,7 +14,7 @@ export default function Gallery({ loggedIn }) {
 
   const fetchPhotos = async () => {
     try {
-      const response = await fetch(`http://localhost:3001/item`);
+      const response = await fetch(`${import.meta.env.VITE_SERVER}/item`);
       const data = await response.json();
       setPhotos(data);
       // setLoading(false);
@@ -35,11 +35,11 @@ export default function Gallery({ loggedIn }) {
   }, []);
 
   const handleDelete = (photo) => {
-    fetch(`http://localhost:3001/item/${photo._id}`, {
+    fetch(`${import.meta.env.VITE_SERVER}/item/${photo._id}`, {
       method: 'DELETE',
     })
       .then(() => {
-        fetch(`http://localhost:3001/item`)
+        fetch(`${import.meta.env.VITE_SERVER}/item`)
           .then(res => res.json())
           .then(data => {
             setPhotos(data);
