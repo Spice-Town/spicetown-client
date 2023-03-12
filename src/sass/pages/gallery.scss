@@ -37,7 +37,7 @@
 
     &-text-area {
       width: 40%;
-      margin-left: 10px;
+      margin-left: 30px;
     }
 
     &-title {
@@ -50,8 +50,13 @@
       opacity: 0.6;
     }
 
+    &-border {
+      border: rgba(0, 0, 0, 0.521) dotted 1px;
+      margin-top: 10px;
+    }
+
     &-text {
-      margin: 20px 0;
+      padding: 10px;
     }
   }
 
