@@ -6,7 +6,6 @@ export default function About() {
     <div className='about'>
       <div className='about__image-column'>
         <Image
-          width={600}
           height={600}
           src={null}
           alt="Owner_Image"
