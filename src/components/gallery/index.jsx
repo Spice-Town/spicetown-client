@@ -94,7 +94,9 @@ export default function Gallery({ loggedIn }) {
               <div className='gallery__modal-text-area'>
                 <p className='gallery__modal-title'>{selectedPic.title}</p>
                 <p className='gallery__modal-dim'>{selectedPic.date}</p>
+                <div className='gallery__modal-border'>
                 <p className='gallery__modal-text'>{selectedPic.description}</p>
+                </div>
               </div>
             </>
           )}
