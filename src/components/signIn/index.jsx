@@ -25,7 +25,7 @@ export default function SignIn({ onLogin }) {
     <div className='signIn'>
       <h2 className='signIn__title'>Enter Password</h2>
       <Input type="password" className='signIn__input' value={password} onChange={handlePasswordChange} />
-      <Button className='signIn__button' onClick={handleLogin}>Log In</Button>
+      <Button className='signIn__button' color='orange' onClick={handleLogin}>Log In</Button>
       {error && <div>{error}</div>}
     </div>
   );
