@@ -20,9 +20,13 @@ export default function Upload() {
       date
     };
 
+    // `${import.meta.env.VITE_SERVER}/item` deployed use
+
+    // 'http://localhost:3001/item' local use
+
     try {
       // eslint-disable-next-line no-unused-vars
-      await axios.post('http://localhost:3001/item', data);
+      await axios.post(`${import.meta.env.VITE_SERVER}/item`, data);
       setFile('');
       setTitle('');
       setDescription('');

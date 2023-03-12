@@ -6,6 +6,12 @@
   height: 150px;
   border-bottom: 1px solid black;
 
+  &__logo {
+    margin-left: 30px;
+    margin-bottom: 10px;
+    margin-top: 5px;
+  }
+
   &__link-group {
     display: flex;
     justify-content: space-between;
@@ -27,13 +33,6 @@
       margin-right: 30px;
     }
   }
-}
-
-
-// spicetown logo
-.mantine-3y8yz3 {
-  margin-left: 10px;
-  margin-bottom: 15px;
 }
 
 .mantine-3y8yz3:hover {
