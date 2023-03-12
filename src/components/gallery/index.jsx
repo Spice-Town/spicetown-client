@@ -1,12 +1,12 @@
-import { Image, Indicator } from '@mantine/core';
+import { Group, Image, Indicator, Modal } from '@mantine/core';
 import React, { useState, useEffect } from 'react';
 
 export default function Gallery({ loggedIn }) {
   const [photos, setPhotos] = useState([]);
-  // const [opened, setOpened] = useState(false);
-  // const [selectedPic, setSelectedPic] = useState('');
-  // const [loading, setLoading] = useState(true);
-  // const [error, setError] = useState(false);
+  const [opened, setOpened] = useState(false);
+  const [selectedPic, setSelectedPic] = useState('');
+  const [loading, setLoading] = useState(null);
+  const [error, setError] = useState(false);
 
   // `${import.meta.env.VITE_SERVER}/item`
 
@@ -17,19 +17,16 @@ export default function Gallery({ loggedIn }) {
       const response = await fetch(`${import.meta.env.VITE_SERVER}/item`);
       const data = await response.json();
       setPhotos(data);
-      // setLoading(false);
-      const images = document.querySelectorAll('.image-fade-in');
-      images.forEach((img) => {
-        img.classList.remove('image-fade-in');
-      });
+      setLoading(false);
     } catch (error) {
       console.error(error);
-      // setLoading(false);
+      setLoading(false);
       setError(true);
     }
   };
 
   useEffect(() => {
+    setLoading(true);
     fetchPhotos();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -43,7 +40,7 @@ export default function Gallery({ loggedIn }) {
           .then(res => res.json())
           .then(data => {
             setPhotos(data);
-            // setLoading(false);
+            setLoading(false);
           })
           .catch(err => console.error(err));
       })
@@ -55,46 +52,54 @@ export default function Gallery({ loggedIn }) {
   return (
     <div className='gallery'>
       <div className='gallery__container'>
-        {photos.filter((index) => index % 2 === 0).map(photo => (
+        {photos.map(photo => (
           <div className='gallery__image-container' key={photo._id}>
-            <div className='gallery__image'>
-              <Image
-                radius="xs"
-                onClick={() => {
-                  setSelectedPic(photo);
-                  setOpened(true);
-                }}
-                src={photo.url}
-                alt={photo._id}
-                className='image-fade-in'
-              />
-            </div>
-            <p>{photo.title}</p>
-            {loggedIn && (
-              <Indicator color="red" label="X" size={25} onClick={() => handleDelete(photo)}></Indicator>
-            )}
-          </div>
-        ))}
-        {photos.filter((index) => index % 2 !== 0).map(photo => (
-          <div  className='gallery__image-container' key={photo._id}>
             <div className='gallery__image' >
               <Image
-              radius="xs"
+                radius='xs'
                 onClick={() => {
                   setSelectedPic(photo);
                   setOpened(true);
                 }}
                 src={photo.url}
                 alt={photo._id}
-                className='image-fade-in'
               />
             </div>
-            <p>{photo.title}</p>
+            <p className='gallery__title'>
+              {photo.title}</p>
             {loggedIn && (
               <Indicator color="red" label="X" size={25} onClick={() => handleDelete(photo)}></Indicator>
             )}
           </div>
         ))}
+      </div>
+      <div className='gallery__modal'>
+        <Modal
+          size="auto"
+          overlayColor='white'
+          overlayOpacity={0.55}
+          overlayBlur={4}
+          opened={opened}
+          onClose={() => setOpened(false)}
+        >
+          <div className='gallery__modal-content'>
+          {selectedPic && (
+            <>
+            
+              <Image
+                height={700}
+                src={selectedPic.url}
+                alt={selectedPic._id}
+              />
+              <div className='gallery__modal-text-area'>
+                <p className='gallery__modal-title'>{selectedPic.title}</p>
+                <p className='gallery__modal-dim'>{selectedPic.date}</p>
+                <p className='gallery__modal-text'>{selectedPic.description}</p>
+              </div>
+            </>
+          )}
+          </div>
+        </Modal>
       </div>
     </div>
   )
