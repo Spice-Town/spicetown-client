@@ -13,19 +13,45 @@
     margin-bottom: 30px;
     position: relative;
     box-sizing: border-box;
-
-    &:hover {
-      cursor: pointer;
-    }
   }
 
   &__image {
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
-    transition: all 0.3s ease-in-out;
+    display: inline-block;
+    overflow: hidden;
+  }
 
-    &:hover {
-      transform: scale(1.03);
-      box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.5);
+  &__title {
+    font-weight: 800;
+    font-size: 20px;
+      text-align: center;
+  margin-top: 10px;
+  }
+
+  &__modal {
+
+    &-content{
+    display: flex;
+    justify-content: space-between;
+    padding: 30px;
+    }
+
+    &-text-area {
+      width: 40%;
+      margin-left: 10px;
+    }
+
+    &-title {
+      font-weight: bold;
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    &-dim {
+      opacity: 0.6;
+    }
+
+    &-text {
+      margin: 20px 0;
     }
   }
 
@@ -35,6 +61,25 @@
       margin-left: 30px;
       margin-right: 30px;
     }
+  }
+}
+
+// image
+.mantine-1tpozjp {
+  -webkit-transition: all .8s ease;
+  -moz-transition: all .8s ease;
+  -ms-transition: all .8s ease;
+  -o-transition: all .8s ease;
+  transition: all .8s ease;
+  vertical-align: middle;
+
+  &:hover {
+    -webkit-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    -o-transform: scale(1.2);
+    transform: scale(1.2);
+    cursor: pointer;
   }
 }
 
@@ -49,4 +94,9 @@
   &:hover {
     cursor: pointer;
   }
+}
+
+// modal
+.mantine-e6rzt5 {
+  background-color: #fdfce6;
 }
