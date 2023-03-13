@@ -52,7 +52,7 @@ export default function Gallery({ loggedIn }) {
   return (
     <div className='gallery'>
       <div className='gallery__container'>
-        {photos.map(photo => (
+        {photos.slice().reverse().map(photo => (
           <div className='gallery__image-container' key={photo._id}>
             <div className='gallery__image' >
               <Image
