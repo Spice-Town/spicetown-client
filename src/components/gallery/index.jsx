@@ -47,8 +47,6 @@ export default function Gallery({ loggedIn }) {
       .catch(err => console.error(err));
   };
 
-  console.log(photos)
-
   return (
     <div className='gallery'>
       <div className='gallery__container'>
