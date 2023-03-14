@@ -14,7 +14,7 @@ export default function About() {
         />
       </div>
       <div className='about__text-column'>
-        <h2>ABOUT SPICETOWN GUITARS</h2>
+        <h2 className='about__text-title' >ABOUT SPICETOWN GUITARS</h2>
         <div className='about__text-area'>
           <p className='about__text'>Shane Colin Morris is a Chicago based luthier that specializes in structural repair and maintenance of stringed instruments. He is         currently working independently as a repair technician while pursuing acoustic and electric guitar making as a craft. His passion for instruments lies within the art of the creative process both visually and sonically.<br />
             <br />
