@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect }  from 'react';
 import { Button } from '@mantine/core';
 import { useDispatch } from 'react-redux';
 import { setActive } from '../../store/reducers/activeSlice';
@@ -13,6 +13,13 @@ export default function Splash() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     navigate('/' + value);
   };
+
+  useEffect(() => {
+    const spinUpBackend = async () => {
+      await fetch(import.meta.env.VITE_SERVER);
+    };
+    spinUpBackend();
+  }, []);
 
   return (
     <div className='splash'>
