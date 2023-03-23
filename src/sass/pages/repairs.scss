@@ -17,8 +17,9 @@
   }
 
   &__text-box {
-    border: 1px solid #ccc;
+    border: 1.5px solid #000000;
     border-radius: 4px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.143);
     display: flex;
     flex-direction: column;
     margin: 20px;
@@ -28,28 +29,27 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
 
   &__title-box {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 10px;
   }
 
   &__header {
     font-size: 2em;
-    font-weight: 900;
+    font-weight: 800;
     margin-left: 10px;
-    margin-top: 10px;
+    margin-top: 20px;
   }
 
   &__title {
     font-size: 1.2em;
-    font-weight: 800;
+    font-weight: 700;
     margin-left: 10px;
-    margin-top: 10px;
   }
 
   &__price {
@@ -63,7 +63,7 @@
       line-height: 1.5em;
       margin-right: 10px;
       margin-left: 10px;
-      margin-top: 10px;
+      font-weight: 500;
     }
   }
 
@@ -72,7 +72,6 @@
     line-height: 1.5em;
     margin-right: 10px;
     margin-left: 10px;
-    margin-top: 10px;
   }
 
   &__disclaim {
@@ -80,7 +79,7 @@
     font-weight: 400;
     margin-top: 20px;
     margin-left: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
 }
 

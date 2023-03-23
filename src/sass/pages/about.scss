@@ -4,6 +4,12 @@
   grid-gap: 20px;
   padding: 20px;
   border: 1px solid black;
+
+  &__image {
+    border: 2px solid rgb(0, 0, 0);
+    border-radius: 3px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.143);
+  }
   
   &__image-column {
     align-self: center;
@@ -26,7 +32,9 @@
   }
 
   &__text-area {
-    border: 1px solid gray;
+    border: 1.5px solid rgb(0, 0, 0);
+    border-radius: 4px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.143);
     padding: 20px;
     margin-bottom: 0;
     margin-right: 30px;
@@ -42,5 +50,9 @@
 @media screen and (max-width: 952px) {
   .about {
     grid-template-columns: 1fr;
+    &__image {
+      border: none;
+      box-shadow: none;
+    }
   }
 }
