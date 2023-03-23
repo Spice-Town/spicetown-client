@@ -9,7 +9,6 @@
   }
 
   &__image-container {
-    width: calc(48% - 10px);
     margin-bottom: 30px;
     position: relative;
     box-sizing: border-box;
@@ -18,26 +17,36 @@
   &__image {
     display: inline-block;
     overflow: hidden;
+    border: 2px solid rgb(0, 0, 0);
+    border-radius: 3px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.143);
   }
 
   &__title {
     font-weight: 800;
     font-size: 20px;
-      text-align: center;
-  margin-top: 10px;
+    text-align: center;
+    margin-top: 10px;
   }
 
   &__modal {
+    
+    &-image {
+      border: 1px solid rgba(0, 0, 0, 0.73);
+      border-radius: 3px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.143);
+      margin-bottom: 30px;
+    }
 
-    &-content{
-    display: flex;
-    justify-content: space-between;
-    padding: 30px;
+    &-content {
+      display: flex;
+      justify-content: space-evenly;
+      padding: 10px;
     }
 
     &-text-area {
-      width: 40%;
-      margin-left: 30px;
+      width: 38%;
+      margin-left: 5px;
     }
 
     &-title {
@@ -51,12 +60,13 @@
     }
 
     &-border {
-      border: rgba(0, 0, 0, 0.521) dotted 1px;
+      border: rgba(0, 0, 0, 0.521) dotted 2px;
       margin-top: 10px;
     }
 
     &-text {
       padding: 10px;
+      font-size: 20px;
     }
   }
 
@@ -79,11 +89,11 @@
   vertical-align: middle;
 
   &:hover {
-    -webkit-transform: scale(1.2);
-    -moz-transform: scale(1.2);
-    -ms-transform: scale(1.2);
-    -o-transform: scale(1.2);
-    transform: scale(1.2);
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    transform: scale(1.1);
     cursor: pointer;
   }
 }
@@ -103,5 +113,8 @@
 
 // modal
 .mantine-e6rzt5 {
-  background-color: #fdfce6;
+  background-color: #e0ccbb;
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 3px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.143);
 }
