@@ -104,12 +104,21 @@ export default function Gallery({ loggedIn }) {
             {selectedPic && (
               <>
                 <div className='gallery__modal-image'>
+                {isMobile ? (
                   <Image
-                    height={700}
-                    width={600}
+                    height={500}
+                    width={290}
                     src={selectedPic.url}
                     alt={selectedPic._id}
                   />
+                ) : (
+                  <Image
+                  height={700}
+                  width={600}
+                  src={selectedPic.url}
+                  alt={selectedPic._id}
+                />
+                )}
                 </div>
                 <div className='gallery__modal-text-area'>
                   <p className='gallery__modal-title'>{selectedPic.title}</p>
