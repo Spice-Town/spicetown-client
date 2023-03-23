@@ -5,13 +5,15 @@ export default function About() {
   return (
     <div className='about'>
       <div className='about__image-column'>
+        <div className='about__image'>
         <Image
-          height={600}
+          height={700}
           src='https://res.cloudinary.com/dpzpnyfv2/image/upload/v1678749117/assets/BF849B87-024D-41DC-A45C-FEBEE096B54B_fw2ezl.jpg'
           alt="Owner_Image"
           fit='contain'
           withPlaceholder
         />
+        </div>
       </div>
       <div className='about__text-column'>
         <h2 className='about__text-title' >ABOUT SPICETOWN GUITARS</h2>
