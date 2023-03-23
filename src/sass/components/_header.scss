@@ -16,14 +16,14 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-right: 150px;
+    margin-right: 20px;
   }
 
   &__burger {
     display: none;
   }
 
-  @media screen and (max-width: 953px) {
+  @media screen and (max-width: 1270px) {
       &__link-group {
       display: none;
     }
@@ -42,7 +42,7 @@
 // nav links
 .mantine-1mji3m1 {
 border-radius: 6px;
-margin-right: 5px;
+margin-right: 20px;
 }
 
 .mantine-1mji3m1:hover {
@@ -52,6 +52,7 @@ background-color: bisque;
 // nav link text
 .mantine-v2d0vk {
 font-size: 30px;
+font-weight: 800;
 font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -62,6 +63,6 @@ font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
 // sidebar title
 .mantine-cx9mud {
-  font-size: 30px;
+  font-size: 40px;
   font-weight: 900;
 }
