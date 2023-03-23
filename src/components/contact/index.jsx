@@ -85,9 +85,9 @@ export default function Contact() {
         variant="filled"
         className={`contact__alert ${showAlert ? 'visible' : ''}`}
       >
-        Your request has been sent, you will here back from us soon.
+        Your repair request has been sent, you will receive a text from us soon.
       </Alert>
-      <h2>Contact Form</h2>
+      <h2>CONTACT FORM</h2>
       <form onSubmit={handleSubmit} className="contact__form">
         <Input.Wrapper
           label="Your Name"
@@ -121,9 +121,8 @@ export default function Contact() {
         <Textarea
           placeholder="Setup needed, replace tuners and strings."
           label="Description of Issue"
-          description="In as much detail as possible describe the problem with your instrument"
+          description="To the best of your ability describe the problem with your instrument"
           radius="md"
-          withAsterisk
           className="contact__input"
           value={issue}
           onChange={(event) => setIssue(event.target.value)}
