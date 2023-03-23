@@ -54,6 +54,8 @@ export default function Gallery({ loggedIn }) {
           <div className='gallery__image-container' key={photo._id}>
             <div className='gallery__image' >
               <Image
+                height={1000}
+                width={700}
                 radius='xs'
                 onClick={() => {
                   setSelectedPic(photo);
@@ -83,12 +85,14 @@ export default function Gallery({ loggedIn }) {
           <div className='gallery__modal-content'>
           {selectedPic && (
             <>
-            
+              <div className='gallery__modal-image'>
               <Image
-                height={700}
+              height={700}
+              width={600}
                 src={selectedPic.url}
                 alt={selectedPic._id}
               />
+              </div>
               <div className='gallery__modal-text-area'>
                 <p className='gallery__modal-title'>{selectedPic.title}</p>
                 <p className='gallery__modal-dim'>{selectedPic.date}</p>
