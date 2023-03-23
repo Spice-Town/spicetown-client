@@ -46,25 +46,25 @@ export default function Header() {
       <div className='header__link-group'>
         <NavLink
           active={'repairs' === active}
-          label={'Repairs'}
+          label={'REPAIRS'}
           onClick={() => handleNavClick('repairs')}
           color='orange'
         />
         <NavLink
           active={'gallery' === active}
-          label={'Gallery'}
+          label={'GALLERY'}
           onClick={() => handleNavClick('gallery')}
           color='orange'
         />
         <NavLink
           active={'about' === active}
-          label={'About'}
+          label={'ABOUT'}
           onClick={() => handleNavClick('about')}
           color='orange'
         />
         <NavLink
           active={'contact' === active}
-          label={'Contact'}
+          label={'CONTACT'}
           onClick={() => handleNavClick('contact')}
           color='orange'
         />
@@ -88,25 +88,25 @@ export default function Header() {
                   <div>
         <NavLink
           active={'repairs' === active}
-          label={'Repairs'}
+          label={'REPAIRS'}
           onClick={() => handleNavClick('repairs')}
           color='orange'
         />
         <NavLink
           active={'gallery' === active}
-          label={'Gallery'}
+          label={'GALLERY'}
           onClick={() => handleNavClick('gallery')}
           color='orange'
         />
         <NavLink
           active={'about' === active}
-          label={'About'}
+          label={'ABOUT'}
           onClick={() => handleNavClick('about')}
           color='orange'
         />
         <NavLink
           active={'contact' === active}
-          label={'Contact'}
+          label={'CONTACT'}
           onClick={() => handleNavClick('contact')}
           color='orange'
         />
