@@ -13,7 +13,6 @@ export default function Contact() {
   const [error, setError] = useState('');
   const [nameError, setNameError] = useState('');
   const [phoneError, setPhoneError] = useState('');
-  const [issueError, setIssueError] = useState('');
 
   const id = useId();
 
@@ -33,20 +32,11 @@ export default function Contact() {
     }
   };
   
-  const validateIssue = () => {
-    if (issue.trim().length < 5) {
-      setIssueError('Description must be at least 5 characters long');
-    } else {
-      setIssueError('');
-    }
-  };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     validateName();
     validatePhone();
-    validateIssue();
-    if (nameError !== '' || phoneError !== '' || issueError !== '') {
+    if (nameError !== '' || phoneError !== '') {
       return;
     }
 
@@ -126,9 +116,7 @@ export default function Contact() {
           className="contact__input"
           value={issue}
           onChange={(event) => setIssue(event.target.value)}
-          onBlur={validateIssue}
         />
-        {issueError && <div className="contact__error">{issueError}</div>}
         <Button color="orange" size="lg" uppercase type="submit" className="contact__button">
           Submit
         </Button>
