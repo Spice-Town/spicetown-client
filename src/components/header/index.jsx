@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Image, NavLink, Burger, Drawer} from '@mantine/core';
+import { Image, NavLink, Burger, Drawer } from '@mantine/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { setActive } from '../../store/reducers/activeSlice';
 import { useNavigate } from 'react-router-dom';
@@ -34,84 +34,96 @@ export default function Header() {
   return (
     <div className='header'>
       <>
-      <div className='header__logo'>
-      <Image
-        src='../../../spicetown.png'
-        fit='contain'
-        height={height}
-        width={width}
-        onClick={() => handleNavClick('home')}
-      />
-      </div>
-      <div className='header__link-group'>
-        <NavLink
-          active={'repairs' === active}
-          label={'REPAIRS'}
-          onClick={() => handleNavClick('repairs')}
-          color='orange'
-        />
-        <NavLink
-          active={'gallery' === active}
-          label={'GALLERY'}
-          onClick={() => handleNavClick('gallery')}
-          color='orange'
-        />
-        <NavLink
-          active={'about' === active}
-          label={'ABOUT'}
-          onClick={() => handleNavClick('about')}
-          color='orange'
-        />
-        <NavLink
-          active={'contact' === active}
-          label={'CONTACT'}
-          onClick={() => handleNavClick('contact')}
-          color='orange'
-        />
-      </div>
-      <Burger
-            opened={opened}
-            onClick={() => setOpened((o) => !o)}
-            size="xl"
-            className="header__burger"
+        <div className='header__logo'>
+          <Image
+            src='../../../spicetown.png'
+            fit='contain'
+            height={height}
+            width={width}
+            onClick={() => handleNavClick('home')}
           />
-                    <Drawer
-            opened={opened}
-            onClose={() => setOpened(false)}
-            title="Spice Town"
-            padding="xl"
-            size="sm"
-            position="right"
-            overlayOpacity={0.55}
-            overlayBlur={3}
-          >
-                  <div>
-        <NavLink
-          active={'repairs' === active}
-          label={'REPAIRS'}
-          onClick={() => handleNavClick('repairs')}
-          color='orange'
+        </div>
+        <div className='header__link-group'>
+          <NavLink
+            active={'repairs' === active}
+            label={'REPAIRS'}
+            onClick={() => handleNavClick('repairs')}
+            color='orange'
+          />
+          <NavLink
+            active={'gallery' === active}
+            label={'GALLERY'}
+            onClick={() => handleNavClick('gallery')}
+            color='orange'
+          />
+          <NavLink
+            active={'about' === active}
+            label={'ABOUT'}
+            onClick={() => handleNavClick('about')}
+            color='orange'
+          />
+          <NavLink
+            active={'contact' === active}
+            label={'CONTACT'}
+            onClick={() => handleNavClick('contact')}
+            color='orange'
+          />
+        </div>
+        <Burger
+          opened={opened}
+          onClick={() => setOpened((o) => !o)}
+          size="xl"
+          className="header__burger"
         />
-        <NavLink
-          active={'gallery' === active}
-          label={'GALLERY'}
-          onClick={() => handleNavClick('gallery')}
-          color='orange'
-        />
-        <NavLink
-          active={'about' === active}
-          label={'ABOUT'}
-          onClick={() => handleNavClick('about')}
-          color='orange'
-        />
-        <NavLink
-          active={'contact' === active}
-          label={'CONTACT'}
-          onClick={() => handleNavClick('contact')}
-          color='orange'
-        />
-      </div>
-          </Drawer>
+        <Drawer
+          opened={opened}
+          onClose={() => setOpened(false)}
+          title="Spice Town"
+          padding="xl"
+          size="sm"
+          position="right"
+          overlayOpacity={0.55}
+          overlayBlur={3}
+        >
+          <div>
+            <NavLink
+              active={'repairs' === active}
+              label={'REPAIRS'}
+              onClick={() => {
+                handleNavClick('repairs');
+                setOpened(false);
+              }}
+              color='orange'
+            />
+            <NavLink
+              active={'gallery' === active}
+              label={'GALLERY'}
+              onClick={() => {
+                handleNavClick('gallery');
+                setOpened(false)
+              }}
+              color='orange'
+            />
+            <NavLink
+              active={'about' === active}
+              label={'ABOUT'}
+              onClick={() => {
+                handleNavClick('about')
+                setOpened(false)
+              }}
+              color='orange'
+            />
+            <NavLink
+              active={'contact' === active}
+              label={'CONTACT'}
+              onClick={() => {
+                handleNavClick('contact');
+                setOpened(false)
+              }}
+              color='orange'
+            />
+          </div>
+        </Drawer>
       </>
     </div>
   );
