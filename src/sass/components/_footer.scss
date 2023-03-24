@@ -21,4 +21,14 @@
   &__text {
     margin-right: 20px;
   }
+
+  &__content {
+    font-size: 20px;
+  }
+
+  @media screen and (max-width: 924px) {
+    &__content {
+      font-size: 12px;
+    }
+  }
 }
