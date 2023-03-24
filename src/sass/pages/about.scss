@@ -50,9 +50,15 @@
 @media screen and (max-width: 952px) {
   .about {
     grid-template-columns: 1fr;
-    &__image {
-      border: none;
-      box-shadow: none;
-    }
+      &__text-area {
+    padding: 10px;
+    margin-bottom: 0;
+    margin-right: 0px;
+  }
+    &__text {
+    margin-top: 0;
+    padding: 3px;
+    font-size: 20px;
+  }
   }
 }
