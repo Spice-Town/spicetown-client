@@ -71,8 +71,8 @@ export default function Gallery({ loggedIn }) {
                 />
               ) : (
                 <Image
-                  height={1000}
-                  width={700}
+                  height={750}
+                  width={650}
                   radius='xs'
                   onClick={() => {
                     setSelectedPic(photo);
