@@ -10,7 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@mantine/carousel": "^6.0.4",
     "@reduxjs/toolkit": "^1.9.3",
+    "embla-carousel-react": "^7.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-imask": "^6.4.3",
@@ -18,7 +20,7 @@
     "redux": "^4.2.1"
   },
   "devDependencies": {
-    "@mantine/core": "^5.10.3",
+    "@mantine/core": "^6.0.4",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
     "@vitejs/plugin-react-swc": "^3.0.0",
