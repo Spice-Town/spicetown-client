@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Alert, Button, Card, Image, Input, Modal } from '@mantine/core';
 import { Carousel } from '@mantine/carousel';
 import { fetchPhotos, deletePhoto, updatePhoto } from '../../store/reducers/photosSlice';
+import { createModalImage, fetchAllModalImages, deleteModalImage } from '../../store/reducers/modalImageSlice';
 
 export default function Upload() {
 
@@ -20,7 +21,10 @@ export default function Upload() {
   const [newDescription, setNewDescription] = useState('');
   const [newDate, setNewDate] = useState('');
 
-  const { photos, loading, error } = useSelector((state) => state.photosSlice);
+  const { photos } = useSelector((state) => state.photosSlice);
+  const { modalImages } = useSelector((state) => state.modalImageSlice);
+
+  console.log(modalImages);
 
   const dispatch = useDispatch();
 
@@ -51,8 +55,6 @@ export default function Upload() {
       description: newDescription,
       date: newDate,
     }
-    console.log(updates);
-    console.log(selectedPic);
     await dispatch(updatePhoto(selectedPic._id, updates));
     dispatch(fetchPhotos());
   };
@@ -85,6 +87,25 @@ export default function Upload() {
     }
   }
 
+  const handleAdd = async (event) => {
+    event.preventDefault();
+    const imageData = {
+      file: add,
+      post_id: selectedPic._id,
+      folder: 'modal'
+    }
+
+    await dispatch(createModalImage(imageData));
+    dispatch(fetchAllModalImages());
+  }
+
+  const handleDeleteModalImage = async (photo) => {
+
+    console.log(photo)
+    await dispatch(deleteModalImage(photo._id));
+    dispatch(fetchAllModalImages());
+  }
+
   useEffect(() => {
     if (showAlert) {
       setTimeout(() => {
@@ -92,6 +113,8 @@ export default function Upload() {
       }, 3000);
     }
   }, [showAlert]);
+
+
 
   return (
     <>
@@ -124,11 +147,10 @@ export default function Upload() {
             <Input.Wrapper
               id="input-link"
               withAsterisk
-              label="Insert Image Link"
+              label="Update Main Image Link"
             >
               <Input
                 id="input-link"
-                placeholder="Link to Image"
                 value={newFile}
                 onChange={(event) => setNewFile(event.target.value)}
               />
@@ -136,11 +158,10 @@ export default function Upload() {
             <Input.Wrapper
               id="input-title"
               withAsterisk
-              label="Title of Post"
+              label="Update Title of Post"
             >
               <Input
                 id="input-title"
-                placeholder="Cool Guitar"
                 value={newTitle}
                 onChange={(event) => setNewTitle(event.target.value)}
               />
@@ -148,22 +169,20 @@ export default function Upload() {
             <Input.Wrapper
               id="input-details"
               withAsterisk
-              label="Description"
+              label="Update Description"
             >
               <Input
                 id="input-details"
-                placeholder="Really Cool Thing I Did"
                 value={newDescription}
                 onChange={(event) => setNewDescription(event.target.value)}
               />
             </Input.Wrapper>
             <Input.Wrapper
               id="input-range"
-              label="Date Range"
+              label="Update Date Range"
             >
               <Input
                 id="input-text"
-                placeholder="03/11/22"
                 value={newDate}
                 onChange={(event) => setNewDate(event.target.value)}
               />
@@ -172,11 +191,39 @@ export default function Upload() {
               color='orange'
               className='upload__button'
               type="submit">Submit
-
             </Button>
           </form>
-          <p>Add Photos</p>
-          <form>
+          <Carousel
+            withIndicators
+            height={300}
+            slideSize="33.333333%"
+            slideGap="md"
+            loop
+            align="start"
+            slidesToScroll={3}
+          >
+            {modalImages.slice().reverse().map((photo, index) => (
+              <Carousel.Slide key={index}>
+                <Card shadow="sm" padding="lg" radius="md" withBorder>
+                  <Card.Section>
+                    <Image
+                      height={200}
+                      radius='xs'
+                      src={photo.url}
+                      alt={photo._id}
+                    />
+                  </Card.Section>
+                  <Button color="red" compact
+                    onClick={() => handleDeleteModalImage(photo)}
+                  >
+                    Delete
+                  </Button>
+                </Card>
+              </Carousel.Slide>
+            ))}
+          </Carousel>
+          <p>Add Photos to Post</p>
+          <form onSubmit={handleAdd}>
             <Input.Wrapper
               id="input-link-add"
               label="Insert Image Link"
@@ -188,13 +235,17 @@ export default function Upload() {
                 onChange={(event) => setAdd(event.target.value)}
               />
             </Input.Wrapper>
-            <Button color="green" compact>
+            <Button
+              color="green"
+              compact
+              type="submit"
+            >
               Add to Post
             </Button>
           </form>
         </Modal>
         <form className='upload__container' onSubmit={handleSubmit}>
-
+          <h2>Create Post</h2>
           <Input.Wrapper
             id="input-link"
             withAsterisk
@@ -255,7 +306,6 @@ export default function Upload() {
             height={400}
             slideSize="33.333333%"
             slideGap="md"
-            loop
             align="start"
             slidesToScroll={3}
           >
