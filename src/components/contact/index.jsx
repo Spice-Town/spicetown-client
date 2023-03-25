@@ -77,7 +77,7 @@ export default function Contact() {
     };
 
     try {
-      await axios.post(`http://localhost:3001/mail`, data);
+      await axios.post(`${import.meta.env.VITE_SERVER}/mail`, data);
       setName('');
       setInput('');
       setIssue('');
