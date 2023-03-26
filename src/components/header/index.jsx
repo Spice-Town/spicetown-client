@@ -78,12 +78,10 @@ export default function Header() {
         <Drawer
           opened={opened}
           onClose={() => setOpened(false)}
-          title="Spice Town"
+          title="SPICETOWN"
           padding="xl"
           size="sm"
           position="right"
-          overlayOpacity={0.55}
-          overlayBlur={3}
         >
           <div>
             <NavLink
