@@ -12,6 +12,7 @@ export default function Upload() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [date, setDate] = useState('');
+  const [alertText, setAlertText] = useState('');
   const [showAlert, setShowAlert] = useState(false);
   const [opened, setOpened] = useState(false);
   const [selectedPic, setSelectedPic] = useState('');
@@ -20,15 +21,12 @@ export default function Upload() {
   const [newTitle, setNewTitle] = useState('');
   const [newDescription, setNewDescription] = useState('');
   const [newDate, setNewDate] = useState('');
+  const [filteredImages, setFilteredImages] = useState([]);
 
   const { photos } = useSelector((state) => state.photosSlice);
   const { modalImages } = useSelector((state) => state.modalImageSlice);
 
-  console.log(modalImages);
-
   const dispatch = useDispatch();
-
-
 
   useEffect(() => {
     setNewFile(selectedPic.url);
@@ -39,11 +37,22 @@ export default function Upload() {
 
   useEffect(() => {
     dispatch(fetchPhotos());
-  }, [dispatch]);
+  }, []);
+
+  useEffect(() => {
+    const images = modalImages.filter((img) => img.post_id === selectedPic._id);
+    setFilteredImages(images);
+  }, [opened, showAlert]);
 
   const handleDelete = async (photo) => {
+    try {
     await dispatch(deletePhoto(photo._id));
     dispatch(fetchPhotos());
+    setAlertText('Post Deleted Successfully');
+    setShowAlert(true);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleUpdate = async (event) => {
@@ -55,8 +64,14 @@ export default function Upload() {
       description: newDescription,
       date: newDate,
     }
+    try {
     await dispatch(updatePhoto(selectedPic._id, updates));
     dispatch(fetchPhotos());
+    setAlertText('Post Updated Successfully');
+    setShowAlert(true);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
 
@@ -81,6 +96,8 @@ export default function Upload() {
       setTitle('');
       setDescription('');
       setDate('');
+      dispatch(fetchPhotos());
+    setAlertText('Post Uploaded Successfully');
       setShowAlert(true);
     } catch (error) {
       console.error(error);
@@ -94,16 +111,26 @@ export default function Upload() {
       post_id: selectedPic._id,
       folder: 'modal'
     }
-
+    try {
     await dispatch(createModalImage(imageData));
     dispatch(fetchAllModalImages());
+    setAlertText('Image Added to Post Successfully');
+    setShowAlert(true);
+    setAdd('')
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   const handleDeleteModalImage = async (photo) => {
-
-    console.log(photo)
+    try {
     await dispatch(deleteModalImage(photo._id));
     dispatch(fetchAllModalImages());
+    setAlertText('Image Deleted from Post Successfully');
+    setShowAlert(true);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   useEffect(() => {
@@ -120,17 +147,18 @@ export default function Upload() {
     <>
       <div className='upload'>
         {showAlert && (
+          <div className='upload__alert'>
           <Alert
-            title="Image Successfully Uploaded!"
+            title={alertText}
             color="teal"
             radius="lg"
             variant="filled"
-            className={`alert-transition ${showAlert ? 'opacity-100' : 'opacity-0'}`}
+            className={`upload_alert ${showAlert ? 'opacity-100' : 'opacity-0'}`}
           />
+          </div>
         )}
         <Modal
           size="auto"
-          overlayColor='white'
           opened={opened}
           onClose={() => setOpened(false)}
           centered
@@ -202,7 +230,7 @@ export default function Upload() {
             align="start"
             slidesToScroll={3}
           >
-            {modalImages.slice().reverse().map((photo, index) => (
+            {filteredImages.slice().reverse().map((photo, index) => (
               <Carousel.Slide key={index}>
                 <Card shadow="sm" padding="lg" radius="md" withBorder>
                   <Card.Section>
@@ -325,6 +353,7 @@ export default function Upload() {
                   </p>
                   <Button color="yellow" compact
                     onClick={() => {
+                      dispatch(fetchAllModalImages());
                       setSelectedPic(photo);
                       setOpened(true);
                     }}
