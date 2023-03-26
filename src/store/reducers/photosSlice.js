@@ -8,14 +8,11 @@ const initialState = {
 };
 
 export const fetchPhotos = () => async (dispatch) => {
-  console.log('Fetching photos...');
   dispatch(fetchPhotosStart());
   try {
     const response = await axios.get('http://localhost:3001/item');
-    console.log('Photos fetched:', response.data);
     dispatch(fetchPhotosSuccess(response.data));
   } catch (error) {
-    console.log('Error fetching photos:', error.message);
     dispatch(fetchPhotosError(error.message));
   }
 };
