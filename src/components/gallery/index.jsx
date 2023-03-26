@@ -8,7 +8,7 @@ export default function Gallery() {
   const [opened, setOpened] = useState(false);
   const [selectedPic, setSelectedPic] = useState('');
 
-  const { photos, loading, error  } = useSelector((state) => state.photosSlice);
+  const { photos, loading, error } = useSelector((state) => state.photosSlice);
 
   const dispatch = useDispatch();
 
@@ -17,7 +17,7 @@ export default function Gallery() {
   useEffect(() => {
     dispatch(fetchPhotos());
   }, [dispatch]);
-  
+
   return (
     <div className='gallery'>
       <div className='gallery__container'>
@@ -57,8 +57,7 @@ export default function Gallery() {
       </div>
       <div className='gallery__modal'>
         <Modal
-          size="auto"
-          overlayColor='white'
+          size="80%"
           opened={opened}
           onClose={() => setOpened(false)}
         >
@@ -66,21 +65,21 @@ export default function Gallery() {
             {selectedPic && (
               <>
                 <div className='gallery__modal-image'>
-                {isMobile ? (
-                  <Image
-                    height={500}
-                    width={290}
-                    src={selectedPic.url}
-                    alt={selectedPic._id}
-                  />
-                ) : (
-                  <Image
-                  height={700}
-                  width={600}
-                  src={selectedPic.url}
-                  alt={selectedPic._id}
-                />
-                )}
+                  {isMobile ? (
+                    <Image
+                      height={500}
+                      width={250}
+                      src={selectedPic.url}
+                      alt={selectedPic._id}
+                    />
+                  ) : (
+                    <Image
+                      height={700}
+                      width={600}
+                      src={selectedPic.url}
+                      alt={selectedPic._id}
+                    />
+                  )}
                 </div>
                 <div className='gallery__modal-text-area'>
                   <p className='gallery__modal-title'>{selectedPic.title}</p>
