@@ -3,6 +3,16 @@
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 20px;
 
+  &__alert {
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    width: 20%;
+    padding: 10px;
+  }
+  
   &__container {
     display: flex;
     flex-direction: column;
@@ -26,10 +36,4 @@
   @media (max-width: 924px) {
     grid-template-columns: 1fr;
   }
-}
-
-
-// inputs
-.mantine-1m3pqry {
-  width: 100%;
 }
