@@ -18,14 +18,11 @@ export const createModalImage = (imageData) => async (dispatch) => {
 };
 
 export const fetchAllModalImages = () => async (dispatch) => {
-  console.log('Fetching all modal images...');
   dispatch(fetchAllModalImagesStart());
   try {
     const response = await axios.get('http://localhost:3001/mod_img');
-    console.log('Modal images fetched:', response.data);
     dispatch(fetchAllModalImagesSuccess(response.data));
   } catch (error) {
-    console.log('Error fetching modal images:', error.message);
     dispatch(fetchAllModalImagesError(error.message));
   }
 };
