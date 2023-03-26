@@ -1,55 +1,22 @@
-import { Group, Image, Indicator, Modal } from '@mantine/core';
+import { Image, Modal } from '@mantine/core';
 import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchPhotos } from '../../store/reducers/photosSlice';
 
-export default function Gallery({ loggedIn }) {
-  const [photos, setPhotos] = useState([]);
+export default function Gallery() {
+
   const [opened, setOpened] = useState(false);
   const [selectedPic, setSelectedPic] = useState('');
-  const [loading, setLoading] = useState(null);
-  const [error, setError] = useState(false);
+
+  const { photos, loading, error } = useSelector((state) => state.photosSlice);
+
+  const dispatch = useDispatch();
 
   const isMobile = window.matchMedia('(max-width: 924px)').matches;
 
-  console.log(isMobile)
-
-  // `${import.meta.env.VITE_SERVER}/item`
-
-  // http://localhost:3001/item 
-
-  const fetchPhotos = async () => {
-    try {
-      const response = await fetch(`${import.meta.env.VITE_SERVER}/item`);
-      const data = await response.json();
-      setPhotos(data);
-      setLoading(false);
-    } catch (error) {
-      console.error(error);
-      setLoading(false);
-      setError(true);
-    }
-  };
-
   useEffect(() => {
-    setLoading(true);
-    fetchPhotos();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const handleDelete = (photo) => {
-    fetch(`${import.meta.env.VITE_SERVER}/item/${photo._id}`, {
-      method: 'DELETE',
-    })
-      .then(() => {
-        fetch(`${import.meta.env.VITE_SERVER}/item`)
-          .then(res => res.json())
-          .then(data => {
-            setPhotos(data);
-            setLoading(false);
-          })
-          .catch(err => console.error(err));
-      })
-      .catch(err => console.error(err));
-  };
+    dispatch(fetchPhotos());
+  }, [dispatch]);
 
   return (
     <div className='gallery'>
@@ -71,8 +38,8 @@ export default function Gallery({ loggedIn }) {
                 />
               ) : (
                 <Image
-                  height={750}
-                  width={650}
+                  height={700}
+                  width={600}
                   radius='xs'
                   onClick={() => {
                     setSelectedPic(photo);
@@ -85,18 +52,12 @@ export default function Gallery({ loggedIn }) {
             </div>
             <p className='gallery__title'>
               {photo.title}</p>
-            {loggedIn && (
-              <Indicator color="red" label="X" size={25} onClick={() => handleDelete(photo)}></Indicator>
-            )}
           </div>
         ))}
       </div>
       <div className='gallery__modal'>
         <Modal
-          size="auto"
-          overlayColor='white'
-          overlayOpacity={0.55}
-          overlayBlur={4}
+          size="80%"
           opened={opened}
           onClose={() => setOpened(false)}
         >
@@ -104,21 +65,21 @@ export default function Gallery({ loggedIn }) {
             {selectedPic && (
               <>
                 <div className='gallery__modal-image'>
-                {isMobile ? (
-                  <Image
-                    height={500}
-                    width={290}
-                    src={selectedPic.url}
-                    alt={selectedPic._id}
-                  />
-                ) : (
-                  <Image
-                  height={700}
-                  width={600}
-                  src={selectedPic.url}
-                  alt={selectedPic._id}
-                />
-                )}
+                  {isMobile ? (
+                    <Image
+                      height={500}
+                      width={250}
+                      src={selectedPic.url}
+                      alt={selectedPic._id}
+                    />
+                  ) : (
+                    <Image
+                      height={700}
+                      width={600}
+                      src={selectedPic.url}
+                      alt={selectedPic._id}
+                    />
+                  )}
                 </div>
                 <div className='gallery__modal-text-area'>
                   <p className='gallery__modal-title'>{selectedPic.title}</p>

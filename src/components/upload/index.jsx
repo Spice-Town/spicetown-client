@@ -1,6 +1,10 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { Alert, Input, MultiSelect, Button } from '@mantine/core';
+import { useSelector, useDispatch } from 'react-redux';
+import { Alert, Button, Card, Image, Input, Modal } from '@mantine/core';
+import { Carousel } from '@mantine/carousel';
+import { fetchPhotos, deletePhoto, updatePhoto } from '../../store/reducers/photosSlice';
+import { createModalImage, fetchAllModalImages, deleteModalImage } from '../../store/reducers/modalImageSlice';
 
 export default function Upload() {
 
@@ -8,7 +12,68 @@ export default function Upload() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [date, setDate] = useState('');
+  const [alertText, setAlertText] = useState('');
   const [showAlert, setShowAlert] = useState(false);
+  const [opened, setOpened] = useState(false);
+  const [selectedPic, setSelectedPic] = useState('');
+  const [add, setAdd] = useState('');
+  const [newFile, setNewFile] = useState('');
+  const [newTitle, setNewTitle] = useState('');
+  const [newDescription, setNewDescription] = useState('');
+  const [newDate, setNewDate] = useState('');
+  const [filteredImages, setFilteredImages] = useState([]);
+
+  const { photos } = useSelector((state) => state.photosSlice);
+  const { modalImages } = useSelector((state) => state.modalImageSlice);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    setNewFile(selectedPic.url);
+    setNewTitle(selectedPic.title);
+    setNewDescription(selectedPic.description);
+    setNewDate(selectedPic.date);
+  }, [selectedPic]);
+
+  useEffect(() => {
+    dispatch(fetchPhotos());
+  }, []);
+
+  useEffect(() => {
+    const images = modalImages.filter((img) => img.post_id === selectedPic._id);
+    setFilteredImages(images);
+  }, [opened, showAlert]);
+
+  const handleDelete = async (photo) => {
+    try {
+    await dispatch(deletePhoto(photo._id));
+    dispatch(fetchPhotos());
+    setAlertText('Post Deleted Successfully');
+    setShowAlert(true);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleUpdate = async (event) => {
+    event.preventDefault();
+    const updates = {
+      file: newFile,
+      folder: 'gallery',
+      title: newTitle,
+      description: newDescription,
+      date: newDate,
+    }
+    try {
+    await dispatch(updatePhoto(selectedPic._id, updates));
+    dispatch(fetchPhotos());
+    setAlertText('Post Updated Successfully');
+    setShowAlert(true);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -31,7 +96,38 @@ export default function Upload() {
       setTitle('');
       setDescription('');
       setDate('');
+      dispatch(fetchPhotos());
+    setAlertText('Post Uploaded Successfully');
       setShowAlert(true);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const handleAdd = async (event) => {
+    event.preventDefault();
+    const imageData = {
+      file: add,
+      post_id: selectedPic._id,
+      folder: 'modal'
+    }
+    try {
+    await dispatch(createModalImage(imageData));
+    dispatch(fetchAllModalImages());
+    setAlertText('Image Added to Post Successfully');
+    setShowAlert(true);
+    setAdd('')
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const handleDeleteModalImage = async (photo) => {
+    try {
+    await dispatch(deleteModalImage(photo._id));
+    dispatch(fetchAllModalImages());
+    setAlertText('Image Deleted from Post Successfully');
+    setShowAlert(true);
     } catch (error) {
       console.error(error);
     }
@@ -45,74 +141,235 @@ export default function Upload() {
     }
   }, [showAlert]);
 
+
+
   return (
     <>
       <div className='upload'>
         {showAlert && (
+          <div className='upload__alert'>
           <Alert
-            title="Image Successfully Uploaded!"
+            title={alertText}
             color="teal"
             radius="lg"
             variant="filled"
-            className={`alert-transition ${showAlert ? 'opacity-100' : 'opacity-0'}`}
+            className={`upload_alert ${showAlert ? 'opacity-100' : 'opacity-0'}`}
           />
+          </div>
         )}
-        <form className='upload__container' onSubmit={handleSubmit}>
+        <Modal
+          size="auto"
+          opened={opened}
+          onClose={() => setOpened(false)}
+          centered
+        >
+          <Image
+            height={300}
+            radius='xs'
+            src={selectedPic.url}
+            alt={selectedPic._id}
+          />
+          <p>Update Post</p>
+          <form className='upload__container' onSubmit={handleUpdate}>
 
             <Input.Wrapper
               id="input-link"
               withAsterisk
-              label="Insert Image Link"
+              label="Update Main Image Link"
             >
               <Input
                 id="input-link"
-                placeholder="Link to Image"
-                value={file}
-                onChange={(event) => setFile(event.target.value)}
+                value={newFile}
+                onChange={(event) => setNewFile(event.target.value)}
               />
             </Input.Wrapper>
             <Input.Wrapper
               id="input-title"
               withAsterisk
-              label="Title of Post"
+              label="Update Title of Post"
             >
               <Input
                 id="input-title"
-                placeholder="Cool Guitar"
-                value={title}
-                onChange={(event) => setTitle(event.target.value)}
+                value={newTitle}
+                onChange={(event) => setNewTitle(event.target.value)}
               />
             </Input.Wrapper>
             <Input.Wrapper
               id="input-details"
               withAsterisk
-              label="Description"
+              label="Update Description"
             >
               <Input
                 id="input-details"
-                placeholder="Really Cool Thing I Did"
-                value={description}
-                onChange={(event) => setDescription(event.target.value)}
+                value={newDescription}
+                onChange={(event) => setNewDescription(event.target.value)}
               />
             </Input.Wrapper>
             <Input.Wrapper
               id="input-range"
-              label="Date Range"
+              label="Update Date Range"
             >
               <Input
                 id="input-text"
-                placeholder="03/11/22"
-                value={date}
-                onChange={(event) => setDate(event.target.value)}
+                value={newDate}
+                onChange={(event) => setNewDate(event.target.value)}
               />
             </Input.Wrapper>
             <Button
               color='orange'
               className='upload__button'
               type="submit">Submit
-              
             </Button>
+          </form>
+          <Carousel
+            withIndicators
+            height={300}
+            slideSize="33.333333%"
+            slideGap="md"
+            loop
+            align="start"
+            slidesToScroll={3}
+          >
+            {filteredImages.slice().reverse().map((photo, index) => (
+              <Carousel.Slide key={index}>
+                <Card shadow="sm" padding="lg" radius="md" withBorder>
+                  <Card.Section>
+                    <Image
+                      height={200}
+                      radius='xs'
+                      src={photo.url}
+                      alt={photo._id}
+                    />
+                  </Card.Section>
+                  <Button color="red" compact
+                    onClick={() => handleDeleteModalImage(photo)}
+                  >
+                    Delete
+                  </Button>
+                </Card>
+              </Carousel.Slide>
+            ))}
+          </Carousel>
+          <p>Add Photos to Post</p>
+          <form onSubmit={handleAdd}>
+            <Input.Wrapper
+              id="input-link-add"
+              label="Insert Image Link"
+            >
+              <Input
+                id="input-link-add"
+                placeholder="Link to Image"
+                value={add}
+                onChange={(event) => setAdd(event.target.value)}
+              />
+            </Input.Wrapper>
+            <Button
+              color="green"
+              compact
+              type="submit"
+            >
+              Add to Post
+            </Button>
+          </form>
+        </Modal>
+        <form className='upload__container' onSubmit={handleSubmit}>
+          <h2>Create Post</h2>
+          <Input.Wrapper
+            id="input-link"
+            withAsterisk
+            label="Insert Image Link"
+          >
+            <Input
+              id="input-link"
+              placeholder="Link to Image"
+              value={file}
+              onChange={(event) => setFile(event.target.value)}
+            />
+          </Input.Wrapper>
+          <Input.Wrapper
+            id="input-title"
+            withAsterisk
+            label="Title of Post"
+          >
+            <Input
+              id="input-title"
+              placeholder="Cool Guitar"
+              value={title}
+              onChange={(event) => setTitle(event.target.value)}
+            />
+          </Input.Wrapper>
+          <Input.Wrapper
+            id="input-details"
+            withAsterisk
+            label="Description"
+          >
+            <Input
+              id="input-details"
+              placeholder="Really Cool Thing I Did"
+              value={description}
+              onChange={(event) => setDescription(event.target.value)}
+            />
+          </Input.Wrapper>
+          <Input.Wrapper
+            id="input-range"
+            label="Date Range"
+          >
+            <Input
+              id="input-text"
+              placeholder="03/11/22"
+              value={date}
+              onChange={(event) => setDate(event.target.value)}
+            />
+          </Input.Wrapper>
+          <Button
+            color='orange'
+            className='upload__button'
+            type="submit">Submit
+
+          </Button>
         </form>
+        <div className='upload__add-area'>
+          <Carousel
+            withIndicators
+            height={400}
+            slideSize="33.333333%"
+            slideGap="md"
+            align="start"
+            slidesToScroll={3}
+          >
+            {photos.slice().reverse().map((photo, index) => (
+              <Carousel.Slide key={index}>
+                <Card shadow="sm" padding="lg" radius="md" withBorder>
+                  <Card.Section>
+                    <Image
+                      height={300}
+                      radius='xs'
+                      src={photo.url}
+                      alt={photo._id}
+                    />
+                  </Card.Section>
+                  <p>
+                    {photo.title}
+                  </p>
+                  <Button color="yellow" compact
+                    onClick={() => {
+                      dispatch(fetchAllModalImages());
+                      setSelectedPic(photo);
+                      setOpened(true);
+                    }}
+                  >
+                    Edit
+                  </Button>
+                  <Button color="red" compact
+                    onClick={() => handleDelete(photo)}
+                  >
+                    Delete
+                  </Button>
+                </Card>
+              </Carousel.Slide>
+            ))}
+          </Carousel>
+        </div>
       </div>
     </>
   );
