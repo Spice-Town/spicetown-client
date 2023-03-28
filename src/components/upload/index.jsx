@@ -37,6 +37,7 @@ export default function Upload() {
 
   useEffect(() => {
     dispatch(fetchPhotos());
+    dispatch(fetchAllModalImages());
   }, []);
 
   useEffect(() => {
