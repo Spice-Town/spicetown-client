@@ -22,7 +22,7 @@ console.log(images);
             className={`carousel__slide${index === currentIndex ? ' carousel__slide-active' : ''}`}
             key={index}
           >
-            <Image height={700} width={600} fit='contain' src={image.url} alt={image.alt} />
+            <Image height={700} width={600} fit='contain' radius='md' src={image.url} alt={image.alt} />
           </div>
         ))}
       </div>
