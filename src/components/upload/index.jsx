@@ -222,17 +222,7 @@ export default function Upload() {
               type="submit">Submit
             </Button>
           </form>
-          <Carousel
-            withIndicators
-            height={300}
-            slideSize="33.333333%"
-            slideGap="md"
-            loop
-            align="start"
-            slidesToScroll={3}
-          >
             {filteredImages.slice().reverse().map((photo, index) => (
-              <Carousel.Slide key={index}>
                 <Card shadow="sm" padding="lg" radius="md" withBorder>
                   <Card.Section>
                     <Image
@@ -248,9 +238,7 @@ export default function Upload() {
                     Delete
                   </Button>
                 </Card>
-              </Carousel.Slide>
             ))}
-          </Carousel>
           <p>Add Photos to Post</p>
           <form onSubmit={handleAdd}>
             <Input.Wrapper
@@ -330,17 +318,8 @@ export default function Upload() {
           </Button>
         </form>
         <div className='upload__add-area'>
-          <Carousel
-            withIndicators
-            height={400}
-            slideSize="33.333333%"
-            slideGap="md"
-            align="start"
-            slidesToScroll={3}
-          >
             {photos.slice().reverse().map((photo, index) => (
-              <Carousel.Slide key={index}>
-                <Card shadow="sm" padding="lg" radius="md" withBorder>
+                <Card key={index} shadow="sm" padding="lg" radius="md" withBorder>
                   <Card.Section>
                     <Image
                       height={300}
@@ -367,9 +346,7 @@ export default function Upload() {
                     Delete
                   </Button>
                 </Card>
-              </Carousel.Slide>
             ))}
-          </Carousel>
         </div>
       </div>
     </>
