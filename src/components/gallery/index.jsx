@@ -1,14 +1,18 @@
-import { Image, Modal } from '@mantine/core';
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { Image, Modal } from '@mantine/core';
 import { fetchPhotos } from '../../store/reducers/photosSlice';
+import { fetchAllModalImages } from '../../store/reducers/modalImageSlice';
+import CustomCarousel from '../customCarousel/CustomCarousel';
 
 export default function Gallery() {
 
   const [opened, setOpened] = useState(false);
   const [selectedPic, setSelectedPic] = useState('');
+  const [filteredImages, setFilteredImages] = useState([]);
 
-  const { photos, loading, error } = useSelector((state) => state.photosSlice);
+  const { photos } = useSelector((state) => state.photosSlice);
+  const { modalImages } = useSelector((state) => state.modalImageSlice);
 
   const dispatch = useDispatch();
 
@@ -16,7 +20,18 @@ export default function Gallery() {
 
   useEffect(() => {
     dispatch(fetchPhotos());
-  }, [dispatch]);
+    dispatch(fetchAllModalImages());
+  }, []);
+
+  useEffect(() => {
+    if (selectedPic) {
+      const images = modalImages.filter((img) => img.post_id === selectedPic._id);
+      setFilteredImages([...images, selectedPic]);
+    }
+  }, [selectedPic, modalImages]);
+
+
+  console.log(filteredImages);
 
   return (
     <div className='gallery'>
@@ -64,22 +79,8 @@ export default function Gallery() {
           <div className='gallery__modal-content'>
             {selectedPic && (
               <>
-                <div className='gallery__modal-image'>
-                  {isMobile ? (
-                    <Image
-                      height={500}
-                      width={250}
-                      src={selectedPic.url}
-                      alt={selectedPic._id}
-                    />
-                  ) : (
-                    <Image
-                      height={700}
-                      width={600}
-                      src={selectedPic.url}
-                      alt={selectedPic._id}
-                    />
-                  )}
+                <div className='gallery__modal-image-carousel'>
+                  <CustomCarousel images={filteredImages.slice().reverse()} />
                 </div>
                 <div className='gallery__modal-text-area'>
                   <p className='gallery__modal-title'>{selectedPic.title}</p>
