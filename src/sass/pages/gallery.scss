@@ -31,14 +31,6 @@
 
   &__modal {
 
-    &-image {
-      border: 1px solid rgba(0, 0, 0, 0.73);
-      border-radius: 3px;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.143);
-      margin-bottom: 30px;
-      width: 50%;
-    }
-
     &-content {
       padding: 10px;
       display: flex;
@@ -85,12 +77,6 @@
         width: 100%;
         margin: 5px;
       }
-      &-image {
-        border: none;
-        box-shadow: none;
-        margin-bottom: 30px;
-        width: 100%;
-      }
   
       display: flex;
       flex-direction: column;
@@ -104,24 +90,24 @@
   
 }
 
-// image
-.mantine-1tpozjp {
-  -webkit-transition: all .8s ease;
-  -moz-transition: all .8s ease;
-  -ms-transition: all .8s ease;
-  -o-transition: all .8s ease;
-  transition: all .8s ease;
-  vertical-align: middle;
+// // image transform does not work
+// .mantine-1tpozjp {
+//   -webkit-transition: all .8s ease;
+//   -moz-transition: all .8s ease;
+//   -ms-transition: all .8s ease;
+//   -o-transition: all .8s ease;
+//   transition: all .8s ease;
+//   vertical-align: middle;
 
-  &:hover {
-    -webkit-transform: scale(1.1);
-    -moz-transform: scale(1.1);
-    -ms-transform: scale(1.1);
-    -o-transform: scale(1.1);
-    transform: scale(1.1);
-    cursor: pointer;
-  }
-}
+//   &:hover {
+//     -webkit-transform: scale(1.1);
+//     -moz-transform: scale(1.1);
+//     -ms-transform: scale(1.1);
+//     -o-transform: scale(1.1);
+//     transform: scale(1.1);
+//     cursor: pointer;
+//   }
+// }
 
 
 // modal
@@ -135,3 +121,7 @@
 .mantine-19pz3dh {
   background-color: #e0ccbb;
 }
+
+
+
+
