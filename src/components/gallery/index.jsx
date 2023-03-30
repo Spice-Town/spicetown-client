@@ -95,12 +95,13 @@ export default function Gallery() {
           size="80%"
           opened={opened}
           onClose={() => setOpened(false)}
+          centered
         >
           <div className='gallery__modal-content'>
             {selectedPic && (
               <>
                 <div className='gallery__modal-image-carousel'>
-                  <CustomCarousel openLightbox={openLightbox} images={filteredImages} />
+                  <CustomCarousel openLightbox={openLightbox} images={filteredImages} isMobile={isMobile} />
                 </div>
                 <div className='gallery__modal-text-area'>
                   <p className='gallery__modal-title'>{selectedPic.title}</p>
@@ -112,8 +113,8 @@ export default function Gallery() {
                   {filteredImages.map((image, index) =>
                     <div className={`gallery__modal-image ${index === currentIndex ? 'gallery__modal-image--selected' : 'gallery__modal-image--deselected'}`}>
                       <Image
-                      height={150}
-                      width={150}
+                      height={120}
+                      width={120}
                       src={image.url}
                       key={index}
                       onClick={() => {
