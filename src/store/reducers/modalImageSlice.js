@@ -5,6 +5,7 @@ const initialState = {
   modalImages: [],
   loading: false,
   error: null,
+  currentIndex: 0,
 };
 
 export const createModalImage = (imageData) => async (dispatch) => {
@@ -77,6 +78,9 @@ const modalImagesSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
+    setCurrentIndex(state, action) {
+      state.currentIndex = action.payload;
+    },
   },
 });
 
@@ -90,6 +94,7 @@ export const {
   deleteModalImageStart,
   deleteModalImageSuccess,
   deleteModalImageError,
+  setCurrentIndex,
 } = modalImagesSlice.actions;
 
 export default modalImagesSlice.reducer;
