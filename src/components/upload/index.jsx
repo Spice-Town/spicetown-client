@@ -27,6 +27,16 @@ export default function Upload() {
 
   const dispatch = useDispatch();
 
+  const isMobile = window.matchMedia('(max-width: 924px)').matches;
+
+  let height = 700;
+  let width = 600;
+
+  if(isMobile) {
+    height = 600;
+    width = 300;
+  }
+
   useEffect(() => {
     setNewFile(selectedPic.url);
     setNewTitle(selectedPic.title);
@@ -165,8 +175,8 @@ export default function Upload() {
           <div className='upload__modal-container'>
             <Image
               fit='contain'
-              height={700}
-              width={600}
+              height={height}
+              width={width}
               radius='md'
               src={selectedPic.url}
               alt={selectedPic._id}
