@@ -251,7 +251,6 @@ export default function Upload() {
                 Add to Post
               </Button>
             </form>
-            <ScrollArea h={250} offsetScrollbars>
               <div className='upload__add-area'>
                 {filteredImages.map((photo, index) => (
                   <Card shadow="sm" padding="lg" radius="md" withBorder>
@@ -273,7 +272,6 @@ export default function Upload() {
                   </Card>
                 ))}
               </div>
-            </ScrollArea>
           </div>
         </Modal>
         <form className='upload__container' onSubmit={handleSubmit}>
