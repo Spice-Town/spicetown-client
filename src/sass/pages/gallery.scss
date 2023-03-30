@@ -68,17 +68,24 @@
 
     &-image {
       margin-top: 20px;
-      margin-left: 20px;
+      justify-self: center;
     }
 
     &-image--deselected {
       opacity: 1;
-      transition: opacity 0.5s ease-in-out; 
+      transition: opacity 0.5s ease-in-out;
     }
 
     &-image--selected {
       opacity: 0.5;
       transition: opacity 0.5s ease-in-out;
+    }
+  }
+
+  @media screen and (max-width: 1535px) {
+    &__modal-image-box {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 
@@ -96,17 +103,21 @@
         width: 100%;
         margin: 5px;
       }
-  
+
+      &-image-box {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
       display: flex;
       flex-direction: column;
-  
+
       &-content {
         flex-direction: column;
         align-items: center;
       }
     }
   }
-  
+
 }
 
 // Gallery Images
@@ -139,7 +150,3 @@
 .mantine-19pz3dh {
   background-color: #e0ccbb;
 }
-
-
-
-
