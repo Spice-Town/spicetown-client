@@ -243,7 +243,7 @@ export default function Upload() {
             </form>
             <ScrollArea h={250} offsetScrollbars>
               <div className='upload__add-area'>
-                {filteredImages.slice().reverse().map((photo, index) => (
+                {filteredImages.map((photo, index) => (
                   <Card shadow="sm" padding="lg" radius="md" withBorder>
                     <Card.Section>
                       <Image
