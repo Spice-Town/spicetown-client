@@ -1,8 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Alert, Button, Card, Image, Input, Modal } from '@mantine/core';
-import { Carousel } from '@mantine/carousel';
+import { Alert, Button, Card, Image, Input, Modal, ScrollArea } from '@mantine/core';
 import { fetchPhotos, deletePhoto, updatePhoto } from '../../store/reducers/photosSlice';
 import { createModalImage, fetchAllModalImages, deleteModalImage } from '../../store/reducers/modalImageSlice';
 
@@ -28,6 +27,16 @@ export default function Upload() {
 
   const dispatch = useDispatch();
 
+  const isMobile = window.matchMedia('(max-width: 924px)').matches;
+
+  let height = 700;
+  let width = 600;
+
+  if(isMobile) {
+    height = 600;
+    width = 300;
+  }
+
   useEffect(() => {
     setNewFile(selectedPic.url);
     setNewTitle(selectedPic.title);
@@ -37,6 +46,7 @@ export default function Upload() {
 
   useEffect(() => {
     dispatch(fetchPhotos());
+    dispatch(fetchAllModalImages());
   }, []);
 
   useEffect(() => {
@@ -46,10 +56,10 @@ export default function Upload() {
 
   const handleDelete = async (photo) => {
     try {
-    await dispatch(deletePhoto(photo._id));
-    dispatch(fetchPhotos());
-    setAlertText('Post Deleted Successfully');
-    setShowAlert(true);
+      await dispatch(deletePhoto(photo._id));
+      dispatch(fetchPhotos());
+      setAlertText('Post Deleted Successfully');
+      setShowAlert(true);
     } catch (error) {
       console.error(error);
     }
@@ -65,10 +75,10 @@ export default function Upload() {
       date: newDate,
     }
     try {
-    await dispatch(updatePhoto(selectedPic._id, updates));
-    dispatch(fetchPhotos());
-    setAlertText('Post Updated Successfully');
-    setShowAlert(true);
+      await dispatch(updatePhoto(selectedPic._id, updates));
+      dispatch(fetchPhotos());
+      setAlertText('Post Updated Successfully');
+      setShowAlert(true);
     } catch (error) {
       console.error(error);
     }
@@ -97,7 +107,7 @@ export default function Upload() {
       setDescription('');
       setDate('');
       dispatch(fetchPhotos());
-    setAlertText('Post Uploaded Successfully');
+      setAlertText('Post Uploaded Successfully');
       setShowAlert(true);
     } catch (error) {
       console.error(error);
@@ -112,11 +122,11 @@ export default function Upload() {
       folder: 'modal'
     }
     try {
-    await dispatch(createModalImage(imageData));
-    dispatch(fetchAllModalImages());
-    setAlertText('Image Added to Post Successfully');
-    setShowAlert(true);
-    setAdd('')
+      await dispatch(createModalImage(imageData));
+      dispatch(fetchAllModalImages());
+      setAlertText('Image Added to Post Successfully');
+      setShowAlert(true);
+      setAdd('')
     } catch (error) {
       console.error(error);
     }
@@ -124,10 +134,10 @@ export default function Upload() {
 
   const handleDeleteModalImage = async (photo) => {
     try {
-    await dispatch(deleteModalImage(photo._id));
-    dispatch(fetchAllModalImages());
-    setAlertText('Image Deleted from Post Successfully');
-    setShowAlert(true);
+      await dispatch(deleteModalImage(photo._id));
+      dispatch(fetchAllModalImages());
+      setAlertText('Image Deleted from Post Successfully');
+      setShowAlert(true);
     } catch (error) {
       console.error(error);
     }
@@ -148,129 +158,123 @@ export default function Upload() {
       <div className='upload'>
         {showAlert && (
           <div className='upload__alert'>
-          <Alert
-            title={alertText}
-            color="teal"
-            radius="lg"
-            variant="filled"
-            className={`upload_alert ${showAlert ? 'opacity-100' : 'opacity-0'}`}
-          />
+            <Alert
+              title={alertText}
+              color="teal"
+              radius="lg"
+              variant="filled"
+              className={`upload_alert ${showAlert ? 'opacity-100' : 'opacity-0'}`}
+            />
           </div>
         )}
         <Modal
           size="auto"
           opened={opened}
           onClose={() => setOpened(false)}
-          centered
         >
-          <Image
-            height={300}
-            radius='xs'
-            src={selectedPic.url}
-            alt={selectedPic._id}
-          />
-          <p>Update Post</p>
-          <form className='upload__container' onSubmit={handleUpdate}>
+          <div className='upload__modal-container'>
+            <Image
+              fit='contain'
+              height={height}
+              width={width}
+              radius='md'
+              src={selectedPic.url}
+              alt={selectedPic._id}
+            />
+            <p>Update Post</p>
+            <form className='upload__modal-form' onSubmit={handleUpdate}>
 
-            <Input.Wrapper
-              id="input-link"
-              withAsterisk
-              label="Update Main Image Link"
-            >
-              <Input
+              <Input.Wrapper
                 id="input-link"
-                value={newFile}
-                onChange={(event) => setNewFile(event.target.value)}
-              />
-            </Input.Wrapper>
-            <Input.Wrapper
-              id="input-title"
-              withAsterisk
-              label="Update Title of Post"
-            >
-              <Input
+                label="Update Main Image Link"
+              >
+                <Input
+                  id="input-link"
+                  value={newFile}
+                  onChange={(event) => setNewFile(event.target.value)}
+                />
+              </Input.Wrapper>
+              <Input.Wrapper
                 id="input-title"
-                value={newTitle}
-                onChange={(event) => setNewTitle(event.target.value)}
-              />
-            </Input.Wrapper>
-            <Input.Wrapper
-              id="input-details"
-              withAsterisk
-              label="Update Description"
-            >
-              <Input
+                label="Update Title of Post"
+              >
+                <Input
+                  id="input-title"
+                  value={newTitle}
+                  onChange={(event) => setNewTitle(event.target.value)}
+                />
+              </Input.Wrapper>
+              <Input.Wrapper
                 id="input-details"
-                value={newDescription}
-                onChange={(event) => setNewDescription(event.target.value)}
-              />
-            </Input.Wrapper>
-            <Input.Wrapper
-              id="input-range"
-              label="Update Date Range"
-            >
-              <Input
-                id="input-text"
-                value={newDate}
-                onChange={(event) => setNewDate(event.target.value)}
-              />
-            </Input.Wrapper>
-            <Button
-              color='orange'
-              className='upload__button'
-              type="submit">Submit
-            </Button>
-          </form>
-          <Carousel
-            withIndicators
-            height={300}
-            slideSize="33.333333%"
-            slideGap="md"
-            loop
-            align="start"
-            slidesToScroll={3}
-          >
-            {filteredImages.slice().reverse().map((photo, index) => (
-              <Carousel.Slide key={index}>
-                <Card shadow="sm" padding="lg" radius="md" withBorder>
-                  <Card.Section>
-                    <Image
-                      height={200}
-                      radius='xs'
-                      src={photo.url}
-                      alt={photo._id}
-                    />
-                  </Card.Section>
-                  <Button color="red" compact
-                    onClick={() => handleDeleteModalImage(photo)}
-                  >
-                    Delete
-                  </Button>
-                </Card>
-              </Carousel.Slide>
-            ))}
-          </Carousel>
-          <p>Add Photos to Post</p>
-          <form onSubmit={handleAdd}>
-            <Input.Wrapper
-              id="input-link-add"
-              label="Insert Image Link"
-            >
-              <Input
+                label="Update Description"
+              >
+                <Input
+                  id="input-details"
+                  value={newDescription}
+                  onChange={(event) => setNewDescription(event.target.value)}
+                />
+              </Input.Wrapper>
+              <Input.Wrapper
+                id="input-range"
+                label="Update Date Range"
+              >
+                <Input
+                  id="input-text"
+                  value={newDate}
+                  onChange={(event) => setNewDate(event.target.value)}
+                />
+              </Input.Wrapper>
+              <Button
+                color='orange'
+                className='upload__button'
+                type="submit">Update
+              </Button>
+            </form>
+            <p>Add Photos to Post</p>
+            <form className='upload__modal-form' onSubmit={handleAdd}>
+              <Input.Wrapper
                 id="input-link-add"
-                placeholder="Link to Image"
-                value={add}
-                onChange={(event) => setAdd(event.target.value)}
-              />
-            </Input.Wrapper>
-            <Button
-              color="green"
-              compact
-              type="submit"
-            >
-              Add to Post
-            </Button>
-          </form>
+                label="Insert Image Link"
+              >
+                <Input
+                  id="input-link-add"
+                  placeholder="Link to Image"
+                  value={add}
+                  onChange={(event) => setAdd(event.target.value)}
+                />
+              </Input.Wrapper>
+              <Button
+                color="green"
+                compact
+                type="submit"
+              >
+                Add to Post
+              </Button>
+            </form>
+            <ScrollArea h={250} offsetScrollbars>
+              <div className='upload__add-area'>
+                {filteredImages.map((photo, index) => (
+                  <Card shadow="sm" padding="lg" radius="md" withBorder>
+                    <Card.Section>
+                      <Image
+                        height={200}
+                        width={200}
+                        radius='xs'
+                        src={photo.url}
+                        alt={photo._id}
+                      />
+                    </Card.Section>
+                    <Button color="red" compact
+                      onClick={() => handleDeleteModalImage(photo)}
+                      className='upload__modal-delete'
+                    >
+                      Delete
+                    </Button>
+                  </Card>
+                ))}
+              </div>
+            </ScrollArea>
+          </div>
         </Modal>
         <form className='upload__container' onSubmit={handleSubmit}>
           <h2>Create Post</h2>
@@ -328,47 +332,42 @@ export default function Upload() {
 
           </Button>
         </form>
-        <div className='upload__add-area'>
-          <Carousel
-            withIndicators
-            height={400}
-            slideSize="33.333333%"
-            slideGap="md"
-            align="start"
-            slidesToScroll={3}
-          >
+        <div className='upload__scroll'>
+        <ScrollArea h={450} offsetScrollbars>
+          <div className='upload__add-area'>
             {photos.slice().reverse().map((photo, index) => (
-              <Carousel.Slide key={index}>
-                <Card shadow="sm" padding="lg" radius="md" withBorder>
-                  <Card.Section>
-                    <Image
-                      height={300}
-                      radius='xs'
-                      src={photo.url}
-                      alt={photo._id}
-                    />
-                  </Card.Section>
-                  <p>
-                    {photo.title}
-                  </p>
-                  <Button color="yellow" compact
-                    onClick={() => {
-                      dispatch(fetchAllModalImages());
-                      setSelectedPic(photo);
-                      setOpened(true);
-                    }}
-                  >
-                    Edit
-                  </Button>
-                  <Button color="red" compact
-                    onClick={() => handleDelete(photo)}
-                  >
-                    Delete
-                  </Button>
-                </Card>
-              </Carousel.Slide>
+              <Card key={index} shadow="sm" padding="lg" radius="md" withBorder>
+                <Card.Section>
+                  <Image
+                    height={300}
+                    radius='md'
+                    src={photo.url}
+                    alt={photo._id}
+                  />
+                </Card.Section>
+                <p>
+                  {photo.title}
+                </p>
+                <Button color="yellow" compact
+                  onClick={() => {
+                    dispatch(fetchAllModalImages());
+                    setSelectedPic(photo);
+                    setOpened(true);
+                  }}
+                  className='upload__card-button'
+                >
+                  Edit
+                </Button>
+                <Button color="red" compact
+                  onClick={() => handleDelete(photo)}
+                  className='upload__card-button'
+                >
+                  Delete
+                </Button>
+              </Card>
             ))}
-          </Carousel>
+          </div>
+        </ScrollArea>
         </div>
       </div>
     </>
