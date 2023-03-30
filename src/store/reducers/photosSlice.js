@@ -10,7 +10,7 @@ const initialState = {
 export const fetchPhotos = () => async (dispatch) => {
   dispatch(fetchPhotosStart());
   try {
-    const response = await axios.get('http://localhost:3001/item');
+    const response = await axios.get(`${import.meta.env.VITE_SERVER}/item`);
     dispatch(fetchPhotosSuccess(response.data));
   } catch (error) {
     dispatch(fetchPhotosError(error.message));
@@ -20,7 +20,7 @@ export const fetchPhotos = () => async (dispatch) => {
 export const updatePhoto = (photoId, updates) => async (dispatch) => {
   dispatch(updatePhotoStart());
   try {
-    const response = await axios.put(`http://localhost:3001/item/${photoId}`, updates);
+    const response = await axios.put(`${import.meta.env.VITE_SERVER}/item/${photoId}`, updates);
     dispatch(updatePhotoSuccess(response.data));
   } catch (error) {
     dispatch(updatePhotoError(error.message));
@@ -30,7 +30,7 @@ export const updatePhoto = (photoId, updates) => async (dispatch) => {
 export const deletePhoto = (photoId) => async (dispatch) => {
   dispatch(deletePhotoStart());
   try {
-    const response = await axios.delete(`http://localhost:3001/item/${photoId}`);
+    const response = await axios.delete(`${import.meta.env.VITE_SERVER}/item/${photoId}`);
     dispatch(deletePhotoSuccess(response.data));
   } catch (error) {
     dispatch(deletePhotoError(error.message));
