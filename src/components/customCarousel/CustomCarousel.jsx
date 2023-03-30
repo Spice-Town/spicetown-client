@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Image } from '@mantine/core';
 import { setCurrentIndex } from '../../store/reducers/modalImageSlice';
 
-const CustomCarousel = ({ images, openLightbox }) => {
+const CustomCarousel = ({ images, openLightbox, isMobile }) => {
 
   const { currentIndex } = useSelector((state) => state.modalImageSlice);
 
@@ -27,14 +27,24 @@ const CustomCarousel = ({ images, openLightbox }) => {
             className={`carousel__slide${index === currentIndex ? ' carousel__slide-active' : ''}`}
             key={index}
           >
-            <Image
-              height={700}
-              width={600}
-              fit='contain'
-              src={image.url}
-              alt={image.alt}
-              onClick={() => openLightbox()}
-            />
+            {isMobile ? (
+              <Image
+                height={500}
+                width={250}
+                fit='contain'
+                src={image.url}
+                alt={image.alt}
+              />
+            ) : (
+              <Image
+                height={700}
+                width={600}
+                fit='contain'
+                src={image.url}
+                alt={image.alt}
+                onClick={() => openLightbox()}
+              />
+            )}
           </div>
         ))}
       </div>
