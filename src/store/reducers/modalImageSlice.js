@@ -11,17 +11,19 @@ const initialState = {
 export const createModalImage = (imageData) => async (dispatch) => {
   dispatch(createModalImageStart());
   try {
-    const response = await axios.post('http://localhost:3001/mod_img', imageData);
+    const response = await axios.post(`${import.meta.env.VITE_SERVER}/mod_img`, imageData);
     dispatch(createModalImageSuccess(response.data));
   } catch (error) {
     dispatch(createModalImageError(error.message));
   }
 };
 
+
+
 export const fetchAllModalImages = () => async (dispatch) => {
   dispatch(fetchAllModalImagesStart());
   try {
-    const response = await axios.get('http://localhost:3001/mod_img');
+    const response = await axios.get(`${import.meta.env.VITE_SERVER}/mod_img`);
     dispatch(fetchAllModalImagesSuccess(response.data));
   } catch (error) {
     dispatch(fetchAllModalImagesError(error.message));
@@ -31,7 +33,7 @@ export const fetchAllModalImages = () => async (dispatch) => {
 export const deleteModalImage = (imageId) => async (dispatch) => {
   dispatch(deleteModalImageStart());
   try {
-    const response = await axios.delete(`http://localhost:3001/mod_img/${imageId}`);
+    const response = await axios.delete(`${import.meta.env.VITE_SERVER}/mod_img/${imageId}`);
     dispatch(deleteModalImageSuccess(response.data));
   } catch (error) {
     dispatch(deleteModalImageError(error.message));
