@@ -1,18 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Image } from '@mantine/core';
+import { setCurrentIndex } from '../../store/reducers/modalImageSlice';
 
-const CustomCarousel = ({ images }) => {
+const CustomCarousel = ({ images, openLightbox }) => {
 
-console.log(images);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const { currentIndex } = useSelector((state) => state.modalImageSlice);
+
+  const dispatch = useDispatch();
 
   const prevSlide = () => {
-    setCurrentIndex((currentIndex - 1 + images.length) % images.length);
+    dispatch(setCurrentIndex((currentIndex - 1 + images.length) % images.length));
   };
 
   const nextSlide = () => {
-    setCurrentIndex((currentIndex + 1) % images.length);
+    dispatch(setCurrentIndex((currentIndex + 1) % images.length));
   };
+
+
 
   return (
     <div className="carousel">
@@ -22,7 +27,14 @@ console.log(images);
             className={`carousel__slide${index === currentIndex ? ' carousel__slide-active' : ''}`}
             key={index}
           >
-            <Image height={700} width={600} fit='contain' radius='md' src={image.url} alt={image.alt} />
+            <Image
+              height={700}
+              width={600}
+              fit='contain'
+              src={image.url}
+              alt={image.alt}
+              onClick={() => openLightbox()}
+            />
           </div>
         ))}
       </div>
