@@ -81,6 +81,11 @@
 }
 
 @media screen and (max-width: 952px) {
+
+  .contact__input {
+    width: 90%;
+  } 
+
   .contact__check {
     &-area {
       display: block;
