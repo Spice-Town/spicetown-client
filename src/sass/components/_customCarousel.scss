@@ -60,3 +60,12 @@
     }
   }
 }
+
+@media screen and (max-width: 924px) {
+  .carousel {
+    width: 250px;
+    height: 500px;
+    margin-top: -50px;
+    margin-bottom: -30px;
+  }
+}
