@@ -49,6 +49,9 @@ export default function Gallery() {
   return (
     <div className='gallery'>
       <div className='gallery__container'>
+        {isMobile && (
+        <p className='gallery__note'>Tap an Image to get more details</p>
+        )}
       {lightboxOpen && (
         <Lightbox
           images={filteredImages}
