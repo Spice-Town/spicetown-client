@@ -18,11 +18,11 @@ function App() {
 
   return (
     <div className="App">
-      <Header/>
+      <Header loggedIn={loggedIn}/>
       <Routes>
         <Route path="/" element={<Splash />} />
         <Route path="/repairs" element={<Repairs />} />
-        <Route path="/gallery" element={<Gallery loggedIn={loggedIn}/>} />
+        <Route path="/gallery" element={<Gallery />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route

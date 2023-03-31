@@ -32,7 +32,7 @@ export default function Upload() {
   let height = 700;
   let width = 600;
 
-  if(isMobile) {
+  if (isMobile) {
     height = 600;
     width = 300;
   }
@@ -181,97 +181,102 @@ export default function Upload() {
               src={selectedPic.url}
               alt={selectedPic._id}
             />
-            <p>Update Post</p>
-            <form className='upload__modal-form' onSubmit={handleUpdate}>
+            <div className='upload__modal-input-area'>
+              <div className='upload__modal-border'>
+                <p>Update Post</p>
+                <form className='upload__modal-form' onSubmit={handleUpdate}>
 
-              <Input.Wrapper
-                id="input-link"
-                label="Update Main Image Link"
-              >
-                <Input
-                  id="input-link"
-                  value={newFile}
-                  onChange={(event) => setNewFile(event.target.value)}
-                />
-              </Input.Wrapper>
-              <Input.Wrapper
-                id="input-title"
-                label="Update Title of Post"
-              >
-                <Input
-                  id="input-title"
-                  value={newTitle}
-                  onChange={(event) => setNewTitle(event.target.value)}
-                />
-              </Input.Wrapper>
-              <Input.Wrapper
-                id="input-details"
-                label="Update Description"
-              >
-                <Input
-                  id="input-details"
-                  value={newDescription}
-                  onChange={(event) => setNewDescription(event.target.value)}
-                />
-              </Input.Wrapper>
-              <Input.Wrapper
-                id="input-range"
-                label="Update Date Range"
-              >
-                <Input
-                  id="input-text"
-                  value={newDate}
-                  onChange={(event) => setNewDate(event.target.value)}
-                />
-              </Input.Wrapper>
-              <Button
-                color='orange'
-                className='upload__button'
-                type="submit">Update
-              </Button>
-            </form>
-            <p>Add Photos to Post</p>
-            <form className='upload__modal-form' onSubmit={handleAdd}>
-              <Input.Wrapper
-                id="input-link-add"
-                label="Insert Image Link"
-              >
-                <Input
-                  id="input-link-add"
-                  placeholder="Link to Image"
-                  value={add}
-                  onChange={(event) => setAdd(event.target.value)}
-                />
-              </Input.Wrapper>
-              <Button
-                color="green"
-                compact
-                type="submit"
-              >
-                Add to Post
-              </Button>
-            </form>
-              <div className='upload__add-area'>
-                {filteredImages.map((photo, index) => (
-                  <Card shadow="sm" padding="lg" radius="md" withBorder>
-                    <Card.Section>
-                      <Image
-                        height={200}
-                        width={200}
-                        radius='xs'
-                        src={photo.url}
-                        alt={photo._id}
-                      />
-                    </Card.Section>
-                    <Button color="red" compact
-                      onClick={() => handleDeleteModalImage(photo)}
-                      className='upload__modal-delete'
-                    >
-                      Delete
-                    </Button>
-                  </Card>
-                ))}
+                  <Input.Wrapper
+                    id="input-link"
+                    label="Update Main Image Link"
+                  >
+                    <Input
+                      id="input-link"
+                      value={newFile}
+                      onChange={(event) => setNewFile(event.target.value)}
+                    />
+                  </Input.Wrapper>
+                  <Input.Wrapper
+                    id="input-title"
+                    label="Update Title of Post"
+                  >
+                    <Input
+                      id="input-title"
+                      value={newTitle}
+                      onChange={(event) => setNewTitle(event.target.value)}
+                    />
+                  </Input.Wrapper>
+                  <Input.Wrapper
+                    id="input-details"
+                    label="Update Description"
+                  >
+                    <Input
+                      id="input-details"
+                      value={newDescription}
+                      onChange={(event) => setNewDescription(event.target.value)}
+                    />
+                  </Input.Wrapper>
+                  <Input.Wrapper
+                    id="input-range"
+                    label="Update Date Range"
+                  >
+                    <Input
+                      id="input-text"
+                      value={newDate}
+                      onChange={(event) => setNewDate(event.target.value)}
+                    />
+                  </Input.Wrapper>
+                  <Button
+                    color='orange'
+                    className='upload__button'
+                    type="submit">Update
+                  </Button>
+                </form>
               </div>
+              <div className='upload__modal-border'>
+                <p>Add Photos to Post</p>
+                <form className='upload__modal-form' onSubmit={handleAdd}>
+                  <Input.Wrapper
+                    id="input-link-add"
+                    label="Insert Image Link"
+                  >
+                    <Input
+                      id="input-link-add"
+                      placeholder="Link to Image"
+                      value={add}
+                      onChange={(event) => setAdd(event.target.value)}
+                    />
+                  </Input.Wrapper>
+                  <Button
+                    color="green"
+                    compact
+                    type="submit"
+                  >
+                    Add to Post
+                  </Button>
+                </form>
+              </div>
+            </div>
+            <div className='upload__add-area'>
+              {filteredImages.map((photo, index) => (
+                <Card shadow="sm" padding="lg" radius="md" withBorder>
+                  <Card.Section>
+                    <Image
+                      height={200}
+                      width={200}
+                      src={photo.url}
+                      alt={photo._id}
+                    />
+                  </Card.Section>
+                  <Button color="red" compact
+                    onClick={() => handleDeleteModalImage(photo)}
+                    className='upload__modal-delete'
+                  >
+                    Delete
+                  </Button>
+                </Card>
+              ))}
+            </div>
           </div>
         </Modal>
         <form className='upload__container' onSubmit={handleSubmit}>
@@ -331,41 +336,41 @@ export default function Upload() {
           </Button>
         </form>
         <div className='upload__scroll'>
-        <ScrollArea h={450} offsetScrollbars>
-          <div className='upload__add-area'>
-            {photos.slice().reverse().map((photo, index) => (
-              <Card key={index} shadow="sm" padding="lg" radius="md" withBorder>
-                <Card.Section>
-                  <Image
-                    height={300}
-                    radius='md'
-                    src={photo.url}
-                    alt={photo._id}
-                  />
-                </Card.Section>
-                <p>
-                  {photo.title}
-                </p>
-                <Button color="yellow" compact
-                  onClick={() => {
-                    dispatch(fetchAllModalImages());
-                    setSelectedPic(photo);
-                    setOpened(true);
-                  }}
-                  className='upload__card-button'
-                >
-                  Edit
-                </Button>
-                <Button color="red" compact
-                  onClick={() => handleDelete(photo)}
-                  className='upload__card-button'
-                >
-                  Delete
-                </Button>
-              </Card>
-            ))}
-          </div>
-        </ScrollArea>
+          <ScrollArea h={450} offsetScrollbars>
+            <div className='upload__add-area'>
+              {photos.slice().reverse().map((photo, index) => (
+                <Card key={index} shadow="sm" padding="lg" radius="md" withBorder>
+                  <Card.Section>
+                    <Image
+                      height={300}
+                      radius='md'
+                      src={photo.url}
+                      alt={photo._id}
+                    />
+                  </Card.Section>
+                  <p>
+                    {photo.title}
+                  </p>
+                  <Button color="yellow" compact
+                    onClick={() => {
+                      dispatch(fetchAllModalImages());
+                      setSelectedPic(photo);
+                      setOpened(true);
+                    }}
+                    className='upload__card-button'
+                  >
+                    Edit
+                  </Button>
+                  <Button color="red" compact
+                    onClick={() => handleDelete(photo)}
+                    className='upload__card-button'
+                  >
+                    Delete
+                  </Button>
+                </Card>
+              ))}
+            </div>
+          </ScrollArea>
         </div>
       </div>
     </>
