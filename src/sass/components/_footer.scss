@@ -6,7 +6,7 @@
   border-top: 1px solid black;
   padding-top: 20px;
   margin-bottom: 30px;
-  
+
   &__svg-group {
     display: flex;
     justify-content: center;
@@ -29,6 +29,18 @@
   @media screen and (max-width: 924px) {
     &__content {
       font-size: 12px;
+    }
+
+    &__svg-group {
+      margin-right: 8px;
+    }
+
+    &__svg {
+      margin-right: 8px;
+    }
+
+    &__text {
+      margin-right: 8px;
     }
   }
 }
