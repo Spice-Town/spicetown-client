@@ -92,6 +92,17 @@ export default function Header({ loggedIn }) {
           position="right"
         >
           <div>
+          {loggedIn && (
+            <NavLink
+              active={'upload' === active}
+              label={'UPLOAD'}
+              onClick={() => {
+                setOpened(false);
+                handleNavClick('upload');
+              }}
+              color='orange'
+            />
+          )}
             <NavLink
               active={'repairs' === active}
               label={'REPAIRS'}
