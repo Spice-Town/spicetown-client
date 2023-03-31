@@ -20,6 +20,7 @@ export default function Contact() {
   const [error, setError] = useState('');
   const [nameError, setNameError] = useState('');
   const [inputError, setInputError] = useState('');
+  const [disabled, setDisabled] = useState(false);
 
   const id = useId();
 
@@ -76,6 +77,8 @@ export default function Contact() {
       }
     };
 
+    setDisabled(true)
+;
     try {
       await axios.post(`${import.meta.env.VITE_SERVER}/mail`, data);
       setName('');
@@ -85,6 +88,7 @@ export default function Contact() {
       setShowError(false);
       setTimeout(() => {
         setShowAlert(false);
+        setDisabled(false);
       }, 5000);
     } catch (error) {
       console.error(error);
@@ -217,7 +221,7 @@ export default function Contact() {
             />
           </div>
         </div>
-        <Button color="orange" size="lg" uppercase type="submit" className="contact__button">
+        <Button disabled={disabled} color="orange" size="lg" uppercase type="submit" className="contact__button">
           Submit
         </Button>
       </form>

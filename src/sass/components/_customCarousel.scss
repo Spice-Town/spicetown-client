@@ -3,6 +3,7 @@
   width: 600px;
   height: 700px;
   overflow: hidden;
+  margin-bottom: 30px;
 
   &__slides {
     display: flex;
@@ -16,6 +17,7 @@
     opacity: 0;
     transition: opacity 1s ease-in-out;
     position: absolute;
+    cursor: zoom-in;
 
     &-active {
       opacity: 1;
