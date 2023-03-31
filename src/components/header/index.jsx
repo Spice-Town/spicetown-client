@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setActive } from '../../store/reducers/activeSlice';
 import { useNavigate } from 'react-router-dom';
 
-export default function Header() {
+export default function Header({ loggedIn }) {
   const [opened, setOpened] = useState(false);
   const dispatch = useDispatch();
   const active = useSelector((state) => state.activeSlice.active);
@@ -44,6 +44,14 @@ export default function Header() {
           />
         </div>
         <div className='header__link-group'>
+          {loggedIn && (
+            <NavLink
+              active={'upload' === active}
+              label={'UPLOAD'}
+              onClick={() => handleNavClick('upload')}
+              color='orange'
+            />
+          )}
           <NavLink
             active={'repairs' === active}
             label={'REPAIRS'}
