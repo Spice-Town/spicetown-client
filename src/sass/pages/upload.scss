@@ -33,30 +33,44 @@
     margin-right: 20px;
   }
 
-  &__modal-container {
+  &__modal {
+
+  &-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     margin: 10px;
   }
+
+  &-input-area {
+    display: flex;
+  }
   
-  &_modal-form {
+  &-form {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     margin: 10px;
   }
+
+  &-border {
+    border: 2px black dotted;
+    padding: 10px;
+    margin: 15px;
+  }
   
-  &__modal-form > * {
+  &-form > * {
     margin: 10px 0;
   }
 
-  &__modal-delete {
+  &-delete {
     margin-top: 10px;
     justify-self: center;
   }
+
+}
 
   &__scroll {
     margin: 20px;
@@ -85,4 +99,16 @@
 // modal image
 .mantine-fp9t1o {
   margin-top: -50px;
+}
+
+
+@media screen and (max-width: 952px) {
+.upload {
+  &__modal {
+  
+    &-input-area {
+      display: block;
+    }
+  }
+}
 }
