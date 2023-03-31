@@ -7,6 +7,11 @@
     justify-content: space-around;
   }
 
+  &__note {
+    font-weight: 300;
+    margin-top: 20px;
+  }
+
   &__image-container {
     margin: 30px;
     position: relative;
@@ -69,6 +74,7 @@
     &-image {
       margin-top: 20px;
       justify-self: center;
+      cursor: pointer;
     }
 
     &-image--deselected {
