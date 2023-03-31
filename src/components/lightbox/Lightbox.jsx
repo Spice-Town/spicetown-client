@@ -2,7 +2,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setCurrentIndex } from '../../store/reducers/modalImageSlice';
-import { Image } from '@mantine/core';
 import { AiOutlineLeft, AiOutlineRight, AiOutlineClose } from 'react-icons/ai';
 
 export default function Lightbox({ images, closeLightbox }) {
@@ -23,14 +22,16 @@ export default function Lightbox({ images, closeLightbox }) {
     <div className='lightbox'>
       <AiOutlineClose className='lightbox__close' onClick={closeLightbox} />
       <AiOutlineLeft className='lightbox__nav lightbox__nav--left' onClick={handlePrev} />
-      <Image                
-        fit='contain'
-       src={images[currentIndex].url}
-        alt={images[currentIndex]._id}
-        height='64%'
-        width='64%'
-         />
+      <div className='lightbox__margin'>
+        <img
+        className='lightbox__image'
+          src={images[currentIndex].url}
+          alt={images[currentIndex]._id}
+        />
+      </div>
       <AiOutlineRight className='lightbox__nav lightbox__nav--right' onClick={handleNext} />
     </div>
   );
+  
+  
 }
