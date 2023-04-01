@@ -33,6 +33,26 @@
     margin-top: 10px;
   }
 
+  &__loading {
+    display: flex;
+    justify-content: center;
+align-items: center;
+    width: 100%;
+    height: 100px;
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  &__error {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100px;
+    font-size: 20px;
+    color: red;
+  }
+
   &__modal {
 
     &-content {
