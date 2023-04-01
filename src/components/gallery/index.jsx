@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Image, Modal } from '@mantine/core';
+import ClockLoader from "react-spinners/ClockLoader";
 import { fetchPhotos } from '../../store/reducers/photosSlice';
 import { fetchAllModalImages, setCurrentIndex } from '../../store/reducers/modalImageSlice';
 import CustomCarousel from '../customCarousel/CustomCarousel';
@@ -13,7 +14,7 @@ export default function Gallery() {
   const [filteredImages, setFilteredImages] = useState([]);
   const [lightboxOpen, setLightboxOpen] = useState(false);
 
-  const { photos } = useSelector((state) => state.photosSlice);
+  const { photos, loading, error } = useSelector((state) => state.photosSlice);
   const { modalImages, currentIndex } = useSelector((state) => state.modalImageSlice);
 
   const dispatch = useDispatch();
@@ -26,8 +27,8 @@ export default function Gallery() {
   }, []);
 
   useEffect(() => {
-    if(!opened) {
-    dispatch(setCurrentIndex(0));
+    if (!opened) {
+      dispatch(setCurrentIndex(0));
     }
   }, [opened]);
 
@@ -45,20 +46,36 @@ export default function Gallery() {
   const closeLightbox = () => {
     setLightboxOpen(false);
   };
- 
+
   return (
     <div className='gallery'>
+      {loading && (
+        <div className='gallery__loading'>
+          <p>Loading...</p>
+          <ClockLoader
+            color="#000000"
+            loading={loading}
+            size={50}
+          />
+        </div>
+      )}
+      {error && (
+        <div className='gallery__error'>
+          <p>Error: {error}</p>
+        </div>
+      )}
+
       <div className='gallery__container'>
         {isMobile && (
-        <p className='gallery__note'>Tap an Image to get more details</p>
+          <p className='gallery__note'>Tap an Image to get more details</p>
         )}
-      {lightboxOpen && (
-        <Lightbox
-          images={filteredImages}
-          closeLightbox={closeLightbox}
-        />
-      )}
-        {photos.slice().reverse().map(photo => (
+        {lightboxOpen && (
+          <Lightbox
+            images={filteredImages}
+            closeLightbox={closeLightbox}
+          />
+        )}
+        {!loading && !error && photos.slice().reverse().map(photo => (
           <div className='gallery__image-container' key={photo._id}>
             <div className='gallery__image'>
               {isMobile ? (
@@ -69,7 +86,7 @@ export default function Gallery() {
                   onClick={() => {
                     setSelectedPic(photo);
                     setOpened(true);
-  
+
                   }}
                   src={photo.url}
                   alt={photo._id}
@@ -113,20 +130,20 @@ export default function Gallery() {
                     <p className='gallery__modal-text'>{selectedPic.description}</p>
                   </div>
                   <div className='gallery__modal-image-box'>
-                  {filteredImages.map((image, index) =>
-                    <div className={`gallery__modal-image ${index === currentIndex ? 'gallery__modal-image--selected' : 'gallery__modal-image--deselected'}`}>
-                      <Image
-                      height={120}
-                      width={120}
-                      src={image.url}
-                      key={index}
-                      onClick={() => {
-                        dispatch(setCurrentIndex(index));
-                      }}
-                      />
+                    {filteredImages.map((image, index) =>
+                      <div className={`gallery__modal-image ${index === currentIndex ? 'gallery__modal-image--selected' : 'gallery__modal-image--deselected'}`}>
+                        <Image
+                          height={120}
+                          width={120}
+                          src={image.url}
+                          key={index}
+                          onClick={() => {
+                            dispatch(setCurrentIndex(index));
+                          }}
+                        />
                       </div>
-                      )}
-                      </div>
+                    )}
+                  </div>
                 </div>
               </>
             )}
