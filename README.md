@@ -4,7 +4,7 @@ This is a web application for a guitar repair shop. It allows the shop to displa
 
 This website was built using React, Redux, and the Mantine UI library, and was bundled with Vite.
 
-## Live Site [Link](https://www.spicetownguitars.com/)
+## Live Site: [Link](https://www.spicetownguitars.com/)
 
 ## Table of Contents
 - [Installation](#installation)
