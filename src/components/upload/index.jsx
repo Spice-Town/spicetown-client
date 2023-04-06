@@ -21,6 +21,9 @@ export default function Upload() {
   const [newDescription, setNewDescription] = useState('');
   const [newDate, setNewDate] = useState('');
   const [filteredImages, setFilteredImages] = useState([]);
+  const [showConfirmation, setShowConfirmation] = useState(false); // to toggle the pop-up
+  const [deletingPhoto, setDeletingPhoto] = useState(null); // to track the photo being deleted
+
 
   const { photos } = useSelector((state) => state.photosSlice);
   const { modalImages } = useSelector((state) => state.modalImageSlice);
@@ -143,6 +146,11 @@ export default function Upload() {
     }
   }
 
+  const handleOpenDelete = async (photo) => {
+    setDeletingPhoto(photo);
+    setShowConfirmation(true);
+  };
+
   useEffect(() => {
     if (showAlert) {
       setTimeout(() => {
@@ -150,8 +158,6 @@ export default function Upload() {
       }, 3000);
     }
   }, [showAlert]);
-
-
 
   return (
     <>
@@ -362,7 +368,7 @@ export default function Upload() {
                     Edit
                   </Button>
                   <Button color="red" compact
-                    onClick={() => handleDelete(photo)}
+                    onClick={() => handleOpenDelete(photo)}
                     className='upload__card-button'
                   >
                     Delete
@@ -372,6 +378,29 @@ export default function Upload() {
             </div>
           </ScrollArea>
         </div>
+        <Modal
+          opened={showConfirmation}
+          onClose={() => setShowConfirmation(false)}
+          size="sm"
+          title="Confirm Deletion"
+        >
+          {deletingPhoto && (
+            <div>
+              <p>Are you sure you want to delete the photo "{deletingPhoto.title}"?</p>
+              <Button
+                color="red" compact
+                className='upload__card-button'
+               onClick={() => {
+                setShowConfirmation(false);
+                handleDelete(deletingPhoto);
+              }}>Yes, delete</Button>
+              <Button
+                color="green" compact
+                className='upload__card-button'
+               onClick={() => setShowConfirmation(false)}>Cancel</Button>
+            </div>
+          )}
+        </Modal>
       </div>
     </>
   );
