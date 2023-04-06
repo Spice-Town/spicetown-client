@@ -19,7 +19,9 @@ export default function Contact() {
   const [showError, setShowError] = useState(false);
   const [error, setError] = useState('');
   const [nameError, setNameError] = useState('');
+  const [isNameValid, setIsNameValid] = useState(false);
   const [inputError, setInputError] = useState('');
+  const [isInputValid, setIsInputValid] = useState(false);
   const [disabled, setDisabled] = useState(false);
 
   const id = useId();
@@ -27,23 +29,31 @@ export default function Contact() {
   const validateName = () => {
     if (name.trim().length === 0) {
       setNameError('Name is required');
+      setIsNameValid(false);
     } else {
       setNameError('');
+      setIsNameValid(true);
     }
   };
 
   const validateInput = () => {
+
     if (contactMethod === 'phone') {
       if (!/^\+1 \(\d{3}\) \d{3}-\d{4}$/.test(input)) {
         setInputError('Please enter a valid phone number in the format +1 (xxx) xxx-xxxx');
+        setIsInputValid(false);
       } else {
         setInputError('');
+        setIsInputValid(true);
       }
     } else {
       if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(input)) {
         setInputError('Please enter a valid email address');
+        setIsInputValid(false);
+        set
       } else {
         setInputError('');
+        setIsInputValid(true);
       }
     }
   };
@@ -53,15 +63,10 @@ export default function Contact() {
     event.preventDefault();
     validateName();
     validateInput();
-    if (nameError !== '' || inputError !== '') {
+    if (isInputValid === false || isNameValid === false) {
       return;
     }
-
-
-    // `${import.meta.env.VITE_SERVER}/mail`   ---- Deployed
-
-    // http://localhost:3001/mail' ---- local
-
+    
     const data = {
       name,
       input,
@@ -76,9 +81,8 @@ export default function Contact() {
         other
       }
     };
-
-    setDisabled(true)
-;
+    
+    setDisabled(true);
     try {
       await axios.post(`${import.meta.env.VITE_SERVER}/mail`, data);
       setName('');
