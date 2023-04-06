@@ -2,6 +2,8 @@
 
 This is a web application for a guitar repair shop. It allows the shop to display their work in a gallery, show pricing, provide an about section, and offer a way for customers to contact the shop for repairs.
 
+This website was built using React, Redux, and the Mantine UI library, and was bundled with Vite.
+
 ## Table of Contents
 - [Installation](#installation)
 - [Usage](#usage)
