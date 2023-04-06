@@ -39,8 +39,5 @@ This application was built using the following technologies:
 - React Spinners
 - Sass
 
-## Contributing
-No contributions are being accepted at this time, as this was made for a client.
-
 ## License
 See the LICENSE file for details.
