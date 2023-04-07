@@ -55,6 +55,7 @@
 
   &__modal {
 
+
     &-content {
       padding: 10px;
       display: flex;
@@ -117,7 +118,6 @@
 
   @media screen and (max-width: 1010px) {
     &__image-container {
-      width: 100%;
       margin-left: 30px;
       margin-right: 30px;
     }
@@ -167,12 +167,27 @@
 
 // modal
 .mantine-17quh42 {
-  background-color: #e0ccbb;
+  background-color: #fdfce6;
   border: 2px solid rgb(0, 0, 0);
   border-radius: 3px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.143);
+  margin-right: 140px;
 }
 
-.mantine-19pz3dh {
-  background-color: #e0ccbb;
+@media screen and (max-width: 768px) {
+  .mantine-17quh42 {
+    margin-right: 50px; 
+  }
 }
+
+@media screen and (max-width: 480px) {
+  .mantine-17quh42 {
+    margin-right: 20px; 
+  }
+}
+
+
+.mantine-19pz3dh {
+  background-color: #fdfce6;
+}
+
