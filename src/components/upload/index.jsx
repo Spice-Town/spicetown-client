@@ -379,9 +379,9 @@ export default function Upload() {
           </ScrollArea>
         </div>
         <Modal
+          size="auto"
           opened={showConfirmation}
           onClose={() => setShowConfirmation(false)}
-          size="sm"
           title="Confirm Deletion"
         >
           {deletingPhoto && (
@@ -390,14 +390,14 @@ export default function Upload() {
               <Button
                 color="red" compact
                 className='upload__card-button'
-               onClick={() => {
-                setShowConfirmation(false);
-                handleDelete(deletingPhoto);
-              }}>Yes, delete</Button>
+                onClick={() => {
+                  setShowConfirmation(false);
+                  handleDelete(deletingPhoto);
+                }}>Yes, delete</Button>
               <Button
                 color="green" compact
                 className='upload__card-button'
-               onClick={() => setShowConfirmation(false)}>Cancel</Button>
+                onClick={() => setShowConfirmation(false)}>Cancel</Button>
             </div>
           )}
         </Modal>
