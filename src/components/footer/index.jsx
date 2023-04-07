@@ -27,7 +27,7 @@ export default function Footer() {
       </div>
       <div className='footer__text'>
         <p className='footer__content'>
-          ©2023 Copyright Spice Town
+          ©2023 Copyright Spicetown Guitars
         </p>
         <p className='footer__content'>All rights reserved.</p>
       </div>
