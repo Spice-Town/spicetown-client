@@ -115,7 +115,6 @@ export default function Gallery() {
           size="80%"
           opened={opened}
           onClose={() => setOpened(false)}
-          centered
         >
           <div className='gallery__modal-content'>
             {selectedPic && (
