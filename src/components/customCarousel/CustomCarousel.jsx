@@ -17,8 +17,6 @@ const CustomCarousel = ({ images, openLightbox, isMobile }) => {
     dispatch(setCurrentIndex((currentIndex + 1) % images.length));
   };
 
-
-
   return (
     <div className="carousel">
       <div className="carousel__slides">

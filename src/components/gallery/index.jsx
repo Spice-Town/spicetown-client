@@ -114,6 +114,7 @@ export default function Gallery() {
         <Modal
           size="80%"
           opened={opened}
+          style={{ maxHeight: '75vh' }}
           onClose={() => setOpened(false)}
         >
           <div className='gallery__modal-content'>
