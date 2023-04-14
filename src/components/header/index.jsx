@@ -79,7 +79,7 @@ export default function Header({ loggedIn }) {
         </div>
         <Burger
           opened={opened}
-          onClick={() => setOpened((o) => !o)}
+          onClick={() => setOpened(true)}
           size="xl"
           className="header__burger"
         />
