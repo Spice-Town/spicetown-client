@@ -10,7 +10,7 @@
     border-radius: 3px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.143);
   }
-  
+
   &__image-column {
     align-self: center;
     display: flex;
@@ -50,15 +50,22 @@
 @media screen and (max-width: 952px) {
   .about {
     grid-template-columns: 1fr;
-      &__text-area {
-    padding: 10px;
-    margin-bottom: 0;
-    margin-right: 0px;
-  }
+
+    &__text-area {
+      padding: 10px;
+      margin-bottom: 0;
+      margin-right: 0px;
+    }
+
     &__text {
-    margin-top: 0;
-    padding: 3px;
-    font-size: 20px;
-  }
+      margin-top: 0;
+      padding: 3px;
+      font-size: 20px;
+    }
+
+    &__image {
+      border: 0px;
+    }
+    
   }
 }
