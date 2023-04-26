@@ -23,7 +23,7 @@ export default function Repairs() {
           uppercase
           onClick={() => handleNavClick('contact')}
         >
-          Contact Spice Town!
+          Contact SpiceTown!
         </Button>
       </div>
       <div className='repairs__text-area'>
@@ -35,7 +35,7 @@ export default function Repairs() {
           <p className='repairs__text'>Includes any necessary neck adjustment, string height adjustment, fretboard cleaning, tightening of hardware, pickup height adjustment, intonation, polishing, and any other general maintenance</p>
           <div className='repairs__title-box'>
             <p className='repairs__title'>FLOYD ROSE/12-STRING/ARCHTOP</p>
-            <p className='repairs__price'>+$15</p>
+            <p className='repairs__price'>$90</p>
           </div>
           <p className='repairs__text'>Set ups on these instruments require additional care to insure proper functionality of hardware</p>
           <div className='repairs__title-box'>
@@ -48,14 +48,14 @@ export default function Repairs() {
         <div className='repairs__text-box'>
           <div className='repairs__header-box'>
             <p className='repairs__header'>SADDLES</p>
-            <p className='repairs__price'>$100</p>
+            <p className='repairs__price'>$150</p>
           </div>
           <div className='repairs__header-box'>
             <p className='repairs__header'>NUTS</p>
-            <p className='repairs__price'>$150</p>
+            <p className='repairs__price'>$175</p>
           </div>
           <p className='repairs__text'>Custom fit bone nut and saddle will improve tonality and playability. Made from unbleached or bleached cow bone.</p>
-          <p className='repairs__text'>*add setup for $50</p>
+          <p className='repairs__text'>*includes set up</p>
           <p className='repairs__disclaim'>*repair rates do not include price of materials</p>
         </div>
         <div className='repairs__text-box'>
@@ -94,7 +94,7 @@ export default function Repairs() {
             <p className='repairs__header'>FRETWORK</p>
             <p className='repairs__price'>$350</p>
           </div>
-          <p className='repairs__text'>Removal of frets, fretboard planning and reinstallation of new frets with level and crowning. Includes set up</p>
+          <p className='repairs__text'>Removal of frets, fretboard planing and installation of new frets, with level, crown, and fret polishing. Includes set up</p>
           <div className='repairs__title-box'>
             <p className='repairs__title'>REFRET WITH BOUND, MAPLE, or EBONY BOARD</p>
             <p className='repairs__price'>$425</p>
@@ -107,7 +107,7 @@ export default function Repairs() {
           <p className='repairs__text'>Minimize fret wear and optimize clarity. Includes set up</p>
           <div className='repairs__header-box'>
             <p className='repairs__header'>OTHER</p>
-            <p className='repairs__price-small'>$50 for 1st hr, $30 every hour after</p>
+            <p className='repairs__price-long'>$50 for 1st hr, $30 every hour after</p>
           </div>
           <p className='repairs__text'>Crack and bracing repairs, hardware installation, custom hardware, etc.</p>
           <p className='repairs__text'>*$30 diagnosis deposit, will go towards final cost</p>
