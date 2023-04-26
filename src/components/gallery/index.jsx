@@ -64,7 +64,9 @@ export default function Gallery() {
           <p>Error: {error}</p>
         </div>
       )}
-
+              {!isMobile && (
+          <p className='gallery__note'>Tap an Image to get more details</p>
+          )}
       <div className='gallery__container'>
         {isMobile && (
           <p className='gallery__note'>Tap an Image to get more details</p>
