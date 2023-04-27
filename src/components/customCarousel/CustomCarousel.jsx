@@ -1,6 +1,5 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Image } from '@mantine/core';
 import { setCurrentIndex } from '../../store/reducers/modalImageSlice';
 
 const CustomCarousel = ({ images, openLightbox, isMobile }) => {
@@ -26,18 +25,14 @@ const CustomCarousel = ({ images, openLightbox, isMobile }) => {
             key={index}
           >
             {isMobile ? (
-              <Image
-                height={500}
-                width={250}
-                fit='contain'
+              <img
+                className='carousel__slide-image'
                 src={image.url}
                 alt={image.alt}
               />
             ) : (
-              <Image
-                height={700}
-                width={600}
-                fit='contain'
+              <img
+                className='carousel__slide-image'
                 src={image.url}
                 alt={image.alt}
                 onClick={() => openLightbox()}
