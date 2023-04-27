@@ -13,12 +13,22 @@ const CustomModal = ({ isOpen, children, onClose }) => {
     };
   }, [isOpen]);
 
+  const handleCloseOnOverlayClick = (e) => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
+
   if (!isOpen) {
     return null;
   }
 
   return (
-    <div className="custom-modal-overlay">
+    <div
+      className="custom-modal-overlay"
+      onClick={handleCloseOnOverlayClick}
+      onTouchStart={handleCloseOnOverlayClick}
+    >
       <div className="custom-modal">
         <button className="custom-modal-close-button" onClick={onClose}>
           &times;
