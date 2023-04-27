@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Image, Modal } from '@mantine/core';
 import ClockLoader from "react-spinners/ClockLoader";
 import { fetchPhotos } from '../../store/reducers/photosSlice';
 import { fetchAllModalImages, setCurrentIndex } from '../../store/reducers/modalImageSlice';
 import CustomCarousel from '../customCarousel/CustomCarousel';
+import CustomModal from '../customModal/CustomModal';
 import Lightbox from '../lightbox/Lightbox';
 
 export default function Gallery() {
@@ -65,7 +65,7 @@ export default function Gallery() {
         </div>
       )}
               {!isMobile && (
-          <p className='gallery__note'>Tap an Image to get more details</p>
+          <p className='gallery__note'>Click an Image to get more details</p>
           )}
       <div className='gallery__container'>
         {isMobile && (
@@ -79,25 +79,8 @@ export default function Gallery() {
         )}
         {!loading && !error && photos.slice().reverse().map(photo => (
           <div className='gallery__image-container' key={photo._id}>
-            <div className='gallery__image'>
-              {isMobile ? (
-                <Image
-                  height={600}
-                  width={300}
-                  radius='xs'
-                  onClick={() => {
-                    setSelectedPic(photo);
-                    setOpened(true);
-
-                  }}
-                  src={photo.url}
-                  alt={photo._id}
-                />
-              ) : (
-                <Image
-                  height={700}
-                  width={500}
-                  radius='xs'
+                <img
+                className='gallery__image'
                   onClick={() => {
                     setSelectedPic(photo);
                     setOpened(true);
@@ -105,19 +88,15 @@ export default function Gallery() {
                   src={photo.url}
                   alt={photo._id}
                 />
-              )}
-            </div>
             <p className='gallery__title'>
               {photo.title}</p>
           </div>
         ))}
       </div>
       <div className='gallery__modal'>
-        <Modal
-          size="80%"
-          opened={opened}
-          style={{ maxHeight: '75vh' }}
-          onClose={() => setOpened(false)}
+        <CustomModal
+isOpen={opened}
+ onClose={() => setOpened(false)}
         >
           <div className='gallery__modal-content'>
             {selectedPic && (
@@ -134,9 +113,7 @@ export default function Gallery() {
                   <div className='gallery__modal-image-box'>
                     {filteredImages.map((image, index) =>
                       <div className={`gallery__modal-image ${index === currentIndex ? 'gallery__modal-image--selected' : 'gallery__modal-image--deselected'}`}>
-                        <Image
-                          height={120}
-                          width={120}
+                        <img
                           src={image.url}
                           key={index}
                           onClick={() => {
@@ -150,7 +127,7 @@ export default function Gallery() {
               </>
             )}
           </div>
-        </Modal>
+        </CustomModal>
       </div>
     </div>
   )
