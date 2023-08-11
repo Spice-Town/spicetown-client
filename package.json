@@ -10,8 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@mantine/carousel": "^6.0.4",
-    "@mantine/hooks": "^6.0.17",
+    "@mantine/carousel": "^6.0.19",
+    "@mantine/hooks": "^6.0.4",
     "@reduxjs/toolkit": "^1.9.3",
     "embla-carousel-react": "^7.1.0",
     "react": "^18.2.0",
