@@ -3,38 +3,43 @@
   &__image {
     overflow: auto;
     background-color: #cccccc;
-    height: 900px;
+    height: 870px;
     position: relative;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    background-image: url('https://res.cloudinary.com/dpzpnyfv2/image/upload/v1681494992/assets/DSC_0010_urwa8z.jpg');
+    background-image: url('https://res.cloudinary.com/dpzpnyfv2/image/upload/v1691767268/assets/splash_1_jmawgv.jpg');
   }
 
   &__button {
     position: absolute;
-    top: 45%;
-    left: 42%;
-
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
   }
-
 
   @media screen and (max-width: 640px) {
 
     &__image {
       overflow: auto;
       background-color: #cccccc;
-      height: 600px;
+      height: 775px;
       position: relative;
       background-position: center;
       background-repeat: no-repeat;
       background-size: cover;
-      background-image: url('https://res.cloudinary.com/dpzpnyfv2/image/upload/v1681495582/assets/DSC_0009_qmmrdo.jpg');
+      background-image: url('https://res.cloudinary.com/dpzpnyfv2/image/upload/v1691767268/assets/splash_2_fastzq.jpg');
+
+      @media screen and (max-width: 450px) {
+        height: 600px;
+        width: 450px !important;
+      }
     }
 
     &__button {
       top: 30%;
-      left: 16%;
+      left: 50%;
+      transform: translate(-50%, -50%); 
     }
   }
 }
