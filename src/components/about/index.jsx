@@ -10,7 +10,7 @@ export default function About() {
   if (isMobile) {
     height = 400;
   } else {
-    height = 700;
+    height = 900;
   }
 
   return (
@@ -19,7 +19,7 @@ export default function About() {
         <div className='about__image'>
         <Image
           height={height}
-          src='https://res.cloudinary.com/dpzpnyfv2/image/upload/v1678749117/assets/BF849B87-024D-41DC-A45C-FEBEE096B54B_fw2ezl.jpg'
+          src='https://res.cloudinary.com/dpzpnyfv2/image/upload/v1691268782/assets/new-shane-pic_ooobki.jpg'
           alt="Owner_Image"
           fit='contain'
           withPlaceholder

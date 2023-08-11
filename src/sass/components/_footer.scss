@@ -7,6 +7,10 @@
   padding-top: 20px;
   margin-bottom: 30px;
 
+  @media screen and (max-width: 450px) {
+    border-top: unset;
+  }
+
   &__svg-group {
     display: flex;
     justify-content: center;
