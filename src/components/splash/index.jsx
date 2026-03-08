@@ -11,7 +11,7 @@ export default function Splash() {
 
   const handleNavClick = (value) => {
     dispatch(setActive(value));
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: 'instant' });
     navigate('/' + value);
   };
 
@@ -42,15 +42,23 @@ export default function Splash() {
   return (
     <div className='splash'>
       <div className='splash__image'>
-          <Button
-            className='splash__button'
-            color='orange'
-            size='xl'
-            uppercase
-            onClick={() => handleNavClick('repairs')}
-          >
-            Get Fixed Up Now!
-          </Button>
+        <Button
+          className='splash__button'
+          color='orange'
+          size='xl'
+          uppercase
+          onClick={() => handleNavClick('repairs')}
+          styles={{
+            root: {
+              transform: 'translate(-50%, -50%) !important',
+              '&:active': {
+                transform: 'translate(-50%, -50%) !important',
+              }
+            }
+          }}
+        >
+          Get Fixed Up Now!
+        </Button>
       </div>
     </div>
   );

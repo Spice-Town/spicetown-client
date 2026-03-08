@@ -12,10 +12,10 @@
   }
 
   &__button {
-    position: absolute;
+    position: absolute !important;
     top: 30%;
     left: 50%;
-    transform: translate(-50%, -50%); 
+    transform: translate(-50%, -50%) !important;
   }
 
   @media screen and (max-width: 640px) {
@@ -36,10 +36,5 @@
       }
     }
 
-    &__button {
-      top: 30%;
-      left: 50%;
-      transform: translate(-50%, -50%); 
-    }
   }
 }
